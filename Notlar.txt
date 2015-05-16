@@ -1,0 +1,67 @@
+////////////////////////////////// C++ Kurs //////////////////////////////////////////
+////////////////////////////////// 16.05.2015 ////////////////////////////////////////
+Neden C++?
+	Verim Kritik
+	Multi Paradigm Programlama Tekniği
+	Çok fazla kütüphane varlığı -- Qt
+	
+Farklılıklar
+implicit int yok mecburen tür belirtilmek zorunda
+C de legal C++ error
+
+int main yaz 
+
+
+
+void fonksiyonun geri dönüş değeri olabilir ama ifade void olmak zorunda.
+Yani fonksiyonun içerisinde void bi fonksiyonu geri döndürebiliriz.
+
+Veri kaybı otomatik tür dönüşümünde syntax hatası değil.
+
+İlk değer verme
+C den farklı olarak T x {exp } c++ 11 le gelen özellik.
+
+
+int func(){
+	double dval = 3.4;   /// İkisindede geçerli
+	int ival = dval ;   /// ikisindede geçerli 
+	
+	
+	int ival {dval}; /// Bu syntax de tür dönüşümü syntax hatası değer kaybı engellenebilir.  Narrowing conversion  ilk değer verme syntaxi
+		
+}
+
+int main(){
+	func();
+	
+	return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
