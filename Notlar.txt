@@ -36,12 +36,43 @@ int main(){
 	
 	return 0;
 }
+Aritmetik türden değişkenler çok özel bir durum yoksa tanımlanmalı.
+
+int temp(45);
+int temp{45};
+int temp = {45};
+
+bunların hepsi C++ da geçerlidir.
+Döngü değişkennini döngünün içinde bildirmeye çalış.
+
+Workaround makrosu
+
+Türlere yönelik farklılıklar : 
+
+Bool Mevcut
+C++ da bool ve yine C deki gibi int değeri kullanılabilir.
 
 
 
 
 
 
+
+#include <iostream>
+
+
+using namespace std;
+
+int main(){
+	
+	cout << typeid(10 > 5).name() << endl;
+	cout << sizeof(bool) << endl;
+	
+}
+
+extern anahtar sözcüğü ile const bir nesneye ilk değer verirseniz dış bağlantı yapılabilir.
+const int *ptr = &x; ----> const olan *ptr
+int * const ptr = &x; ----> const olan ptr;
 
 
 
