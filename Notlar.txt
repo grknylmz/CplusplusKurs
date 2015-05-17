@@ -75,12 +75,66 @@ const int *ptr = &x; ----> const olan *ptr
 int * const ptr = &x; ----> const olan ptr;
 
 
+#include <iostream>
+
+using namespace std;
+
+int main(){
+	cout << "Hello World" << endl;
+	
+	return 0;
+
+	
+}
 
 
 
 
 
 
+
+package dediğimiz kavram c++ da namespace olarak geçiyor.
+bir isim alanındaki isimi erişmek için;
+
+neco::X --> ismi neco olan package da ara
+:: -> çözünürlük operatörü
+
+
+
+#include <iostream>
+
+using namespace std;
+
+int main(){
+	int x = 10;
+	double dval = 2.3;
+	
+	
+	cout << x << << "    " << dval << "\n";
+		
+	
+	return 0;
+}
+
+#include <iostream>
+
+using namespace std;
+
+int main(){
+		
+	
+	return 0;
+}
+
+int main(){
+	int x,y;
+	
+	cout << "iki sayi girniniz" ;
+	cin >> x >> y;
+	
+	
+	return 0;
+}
 
 
 
