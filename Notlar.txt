@@ -138,6 +138,207 @@ int main(){
 
 
 
+.a
+
+->b
+
+::x
+
+class Myclass{
+
+public:
+
+private:
+
+protected:
+
+
+};
+
+
+struct da heryer public 
+class içerisinde değişken.
+
+Sınıfın elemanları:
+Data Members		/// Tipik olarak private olarak konulur, protected kalıtım ile devreye girecek
+-Static 
+-Non Static
+Member Functions 
+m.func()  // Nesne ile çağırma
+ptr->func() // Fonksyion ile çağırma
+
+Sınıfların üye fonksiyonu tekrar bildirilemez
+
+int Myclass::func(){
+
+	myclass::x -----> sadece class scope da arama
+	this.x; -----> """"
+};
+
+
+
+
+class Myclass{
+public:
+	void func();
+	void foo()const; /// içinde sınıfında veri elemanlarını değiştirmeye çalışmak syntax hatası Getter ?
+	////Const elemanlar ile sınıfın sadece const fonksiyonlarını çağırabiliriz.
+
+
+
+
+};
+
+
+
+class Myclass{
+
+public:
+	****** func(int);
+	****** func(int)const; /////Const overloading
+
+	x kendisini const sa const fonksiyon çağırılır değilse normal fonksiyon çağırılır.
+
+
+};
+
+
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Account{
+public:
+
+    string getAccountName();
+    void transfer(Account &r, double sum);
+};
+
+int main(){
+    Account necati;
+    Account sina;
+
+    necati.transfer(sina,1000);
+
+    return 0;
+}
+
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Account{
+    string name;
+    double sum;
+    mutable int callCounter; ///mutable kullanılarak const fonksiyonuyla çağrılabilir hale getirtilir.
+
+public:
+    void display()const;
+    
+};
+
+
+
+void Account::display() const {
+    callCounter++;////Sınıfın veri elemanı değiştirilemez
+    
+
+}
+
+
+
+
+int main(){
+   
+
+    return 0;
+}
+
+
+
+Sınıfın veri elemanının const üye fonksyionlar değiştirilmesini istiyor isek , mutable anahtar sözcüğü ile tanımlamak zorundayız.
+Değişmeyecek bütün veri elemanları için const anahtar sözcüğü kullanılmak zorundadır.
+
+Constructor : :
+
+#include <string>
+#include <iostream>
+
+
+
+using namespace std;
+
+class Myclass{
+	Myclass(); /// Gecerli ctor private olabilir.
+public:
+	Myclass();
+	Myclass(int = 0);
+	Myclass(int = 0, int = 0);
+
+};
+
+
+
+////CPP
+
+
+Myclass::Myclass(){
+cout << "Myclass::Myclass()" << endl;
+
+}
+
+int main(){
+
+cout << "main baslıyor"<< endl;
+cout << "Main bitiyor" << endl;
+
+
+Myclass *ptr; /////Bu bir pointer nesne değil o yüzden constructor çağrılmayacak.
+Myclass m;
+Myclass &r = m; //// Referans constructor ı çağırtmaz aksine isim verilir sadece.
+
+Myclass m(); /// İsmi m olan gdd Myclass turu olan bir işlevin bildirimi.
+Myclass m{}; ///C++ 11 le gelen nesne semantiği
+
+cout << "main basladı" << endl;
+Myclass x;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

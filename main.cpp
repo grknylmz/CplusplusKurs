@@ -1,15 +1,21 @@
-
 #include <iostream>
-
+#include <string>
 using namespace std;
 
+class Account{
+public:
+    ////////
+    string getAccountName();
+    void transfer(Account &r, double sum);
+};
+
 int main(){
-    int x = 10;
-    double dval = 2.3;
+    Account necati;
+    Account sina;
 
-
-    cout << x << "    " << dval << "\n";
-
+    necati.transfer(sina,1000);
 
     return 0;
 }
+
+
