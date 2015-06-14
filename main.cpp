@@ -1,21 +1,17 @@
 #include <iostream>
-#include <string>
+#include "Point.h"
+
+
 using namespace std;
 
-class Account{
-public:
-    ////////
-    string getAccountName();
-    void transfer(Account &r, double sum);
-};
+int main() {
+    Point p1;
+    cout<<p1.getY()<<endl;
+    p1.display();
+    cout<<p1.getOriginDistance()<<endl;
+    Point *refPoint = new Point(5,5);
+    const Point refpoint2{6,6};
 
-int main(){
-    Account necati;
-    Account sina;
 
-    necati.transfer(sina,1000);
 
-    return 0;
 }
-
-

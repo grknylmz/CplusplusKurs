@@ -297,7 +297,7 @@ cout << "main baslıyor"<< endl;
 cout << "Main bitiyor" << endl;
 
 
-Myclass *ptr; /////Bu bir pointer nesne değil o yüzden constructor çağrılmayacak.
+Myclass *ptr; /////Bu bir pointer, nesne değil o yüzden constructor çağrılmayacak.
 Myclass m;
 Myclass &r = m; //// Referans constructor ı çağırtmaz aksine isim verilir sadece.
 
@@ -309,20 +309,115 @@ Myclass x;
 
 }
 
+14.06.2015 Pazar
+
+
+Constructor sınıfın public non-static inline fonksiyonudur.
+
+Destructor ın ismiyle çaprıldığı tek yer 
+// placement new operatörü //
+Destructor tanımlamazsak derleyici sınıfa public non static inline kod ekler.
+
+R.A.I.I.
+
+Resource Acquisiton is Initialization
+Smart pointer Sınıfları
+Dinamik nesne bellekte yer tutmaya devam eder eğer delete edilmezse.
+
+
+INLINE FONKSİYONLAR
+extern c diye belirtiyorduk c'den ' aldığımız kaynak kodlarda.
+1- Çok sık çağrılan kodu küçük , ona yönelik çözümlerden biri (C'deki' function like macroya alternatif);
+
+inline int square(int a){
+
+	return a*a;
+}
+
+
+bu inline fonksyionlar başlık dosyalarının içindedirler.
+Sınıfın non static üye fonksiyonları , sınıfın static üye fonksyionları , 
+
+friend int func(){
+	
+}
+
+///////////////////
+
+
+#include <iostream>
+
+using namespace std;
+
+
+
+class Point{
+
+};
+
+int main(){
+
+
+}
+
+
+Sınıflara ayırma amacı :
+1- Soyutlama yapabilme
+2- Kolay değişiklik yapabilme
+
+M.I.L. Member Initialization List
+ctor syntaxi 
+
+Bazen sınıfın veri elemanlarına referans vermek zorundayız buna göre bunları MIL syntax ina uygun yapmak zorundayız
 
 
 
 
+Point::Point(double x, double y) : mx(x) , my(y) {        
+}
+
+
+///// Const veya referans elemanlar kullanıyor isek MIL syntax ini kullanmak zorundayız.
+///// C++ 11 e kadar ilk değer vermenin tek yolu buydu.
+
+
+C++ 11 le gelen iki tane çok önemli anahtar sözcük : 
+default
+delete
+
+/// Operator overloading
+
+Point() = default; ///C++ 11
+friend std::ostream &operator<<(std::ostream &os, const Point &r){
+	return os << r.mx << r.my << endl;
+
+} 			
 
 
 
+Sınıf elemanlarına default arguman  atama
+
+class Data{
+	int mx = 0;
+	int my;
+	int mz;
+public:
+	Data() : my{13} , mz{56}{}
+	void display()const{
+		cout << mx << my << mz << endl;
+	}
+
+};
 
 
+int int main(int argc, char const *argv[])
+{
+	Data myData;
+	myData.display();
+	
 
-
-
-
-
+	return 0;
+}
 
 
 
