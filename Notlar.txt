@@ -575,47 +575,224 @@ class Account{
 	const double m_interest_rate;
 	static double m_interest_rate;
 	const static double m_interest_rate;
-	
+
+
+	const static de integral type olmak zorunda !!!!! double float vs olamaz.
+
 public:
-
-
-
 
 };
 
 
 
 
+////////////////////////////////////////////////////////////////
+
+Conversion Constructor:
+
+
+class Myclass{
+	Myclass(int);
+public:
+
+	Myclass(int){
+		cout<< "Myclass(int)"
+	}
+
+};
+
+
+void func(Myclass m){
+
+
+}
 
 
 
 
 
+int int main(int argc, char const *argv[])
+{
+	Myclass m(456);
+	func(78);
+	m = 20;
+
+
+
+
+	return 0;
+}
+//////////////////////////////////////////////////////////////
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+
+
+
+class Counter{
+	Counter();
+public:
+	Counter();
+	Counter(int);
+
+};
+
+
+void func(const Counter &r);
 
 
 
 
 
+int main(){
+	string s;
+	s = "mustafa";
+	Counter mycounter;
+
+	//////Counter c(15);
+	//////func(c);
+
+
+	func(15);
+
+
+	return 0;
+
+}
+
+//////////////////////////////////////////////////////////////
+
+
+int int main(int argc, char const *argv[])
+{
+	int ci;
+	Counter c;
+
+
+	func(c);
+	return 0;
+}
 
 
 
+Explicit anahtar sözcüğü:
+explicit yazarak dönüşümleri gösterek yapmasını isteriz.
+Diğer şekilde implicit yapar ve göstermez cast'i';
+
+Exaxct match
+promotion
+
+user defined conversions
+
+Bir standard conversion sonrasında user defined conversion gerekiyorsa derleyici bunu yapar.
+Tam tersi yine mümkün.
+ 
+
+//////////////////////////////////////////////////////////////
+
+using namespace std;
 
 
 
+int int main(int argc, char const *argv[])
+{
+	T a[100]; /// default init.
+	T x; ////Default initialization
+	T x(10);	T x{10};	/// Value init
+	T x = 100 /// Copy init copy constructor çağrılır.
+
+	T x(19);
+	T y = 19;  /// explicit olması durumunda error olur.
+
+
+	string s1("Ali");
+	string s2 = "murtaza"; //// Explicit olsa idi syntax hatası
+
+	return 0;
+}
 
 
 
+En önemli Özellikler C++11 le gelen
 
-
+1- Move semantiği
+2- 
+3-
+4-
+5-
 
 
 //////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////////////////////
+class Myclass{
+
+public:
+	Myclass(){
+
+		cout << "Myclass :: counstructor" << endl;
+
+	}
+
+	~Myclass(){
+		cout << "Myclass :: destructor" << endl;
+	}
+
+	void display()const{
+		cout << "Myclass::display"<< endl;
+	}
+};
+
+#include <memory>
+using namespace std;
+
+int int main(int argc, char const *argv[])
+{
+	unique_ptr /// Pointer ın scope u bittiğinde nesne destruct olacak
+
+	Myclass *p = new Myclass();
+
+	p->display();
+	delete(p);
+	
+
+	///////////
+
+
+
+
+	return 0;
+}
+
+void func(unique_ptr<Myclass>); //// Sınıf türünden ise copy init
+
+
+
+
+
+int int main(int argc, char const *argv[])
+{
+	cout << "main basladi" << endl;
+	{
+		unique_ptr<Myclass> ptr(new Myclass);
+		ptr->display();
+	}
+
+	cout << "Main bitiyor" << endl;
+
+	return 0;
+}
+
+
+
+
+
+
+
 
 
 //////////////////////////////////////////////////////////////
