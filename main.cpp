@@ -4,14 +4,30 @@
 
 using namespace std;
 
-int main() {
-    Point p1;
-    cout<<p1.getY()<<endl;
-    p1.display();
-    cout<<p1.getOriginDistance()<<endl;
-    Point *refPoint = new Point(5,5);
-    const Point refpoint2{6,6};
+
+class Complex{
+    Complex(double r, double i); /// kartezyen
+    Complex(double angle, double distance , int kutupsal); // kutupsal
+
+public:
+
+    static Complex *createCarte(double r, double i){
+        return new Complex(r,i);
+    }
+
+
+    static Complex *createPolar(double angle, double distance , int kutupsal){
+        return new Complex(angle , distance , kutupsal);
+    }
+};
 
 
 
+
+
+
+int main(){
+
+
+    return 0;
 }

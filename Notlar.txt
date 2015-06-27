@@ -30,6 +30,7 @@ int func(){
 	int ival {dval}; /// Bu syntax de tür dönüşümü syntax hatası değer kaybı engellenebilir.  Narrowing conversion  ilk değer verme syntaxi
 		
 }
+int ival = dval ;
 
 int main(){
 	func();
@@ -418,6 +419,250 @@ int int main(int argc, char const *argv[])
 
 	return 0;
 }
+
+
+Başlık dosyasında using bildirimi asla yazılmıcak
+Başlık include eder 
+
+Başlıkta örneğin std::string m_name;  tarzında kullanılacak.üü
+
+static std::list<Fighter *> ms_list;
+Tanımlamada static anahtar sözcüğü yer almaz. Başlık dosyasında static anahtar sözcüğü kullanılmaz.
+Nesneler main çağrılmasından önce construct edilecek.
+
+Named Constructor - İsimlendirilmiş Yapılandırıcı
+Kendisi constructor değil ama bir üye sınıfın constructor ı olarak davranıyor.
+Öyle durumlar varki client a otomatik veya statik ömürlü oluşturtmak istemiyoruz.
+Sınıfa statik bir üye fonksyionu yazarız , private bölüme erişebilir. New olarak erişir.
+
+C++ da new operatorleri nesnenin adresini verir.
+
+
+//
+// Created by Gurkan Yilmaz on 27/06/15.
+//
+
+#include <iostream>
+#include "Dyna.h"
+
+
+using namespace std;
+
+class Dyna{
+    int mx;
+    Dyna(int x): mx{x}{}
+
+
+
+public:
+    static Dyna *createObject(int val){
+        return new Dyna(val);
+    }
+
+    void display()const{
+
+    }
+
+};
+
+
+
+int main(){
+    Dyna *p = Dyna::createObject(45);
+
+    p->display();
+    
+}
+
+
+////////////////////////////////////////////////////////
+
+
+#include <iostream>
+#include "Point.h"
+
+
+using namespace std;
+
+
+class Complex{
+    Complex(double r, double i); /// kartezyen
+    Complex(double angle, double distance , int kutupsal); // kutupsal
+
+public:
+
+    static Complex *createCarte(double r, double i){
+        return new Complex(r,i);
+    }
+    
+    
+    static Complex *createPolar(double angle, double distance , int kutupsal){
+        return new Complex(angle , distance , kutupsal);
+    }
+};
+
+
+
+
+
+
+int main(){
+
+
+    return 0;
+}
+
+Singleton ::
+
+
+
+Bir sınıf türünden sadece bir nesne olacak ikinci bir nesne oluşturulmasına izin verilmeyecek.
+Global access verilecek tüm clientlar bunu kullanabilecek.
+Modellediği nesnenin olayı bu. 
+İkinci nesne oluşturulamaz. Nesne sayısının artması compile time da tespit edilip hatta öncesinde syntax hatası olarak verilerek beliritilir.
+
+
+Meyer Singleton Kodu::
+
+
+class Sina{
+	Sina(){}
+
+public:
+	static Sina *singleton(){
+		static Sina single;
+		return &single;
+	}
+};
+
+
+int main(){
+
+	auto ptr = Sina::singleton();
+	ptr->display();
+}
+
+/////////////////////////////
+
+
+const ve static ise ilk değer verilebilir sınıf içerisinde
+
+
+class Data{
+	static const size_t size = 100;
+	static int a[];
+
+public:
+	static size_t getsize(){ return ms_size; }  ///static üye fonksiyon const olmaz!!!!!!!!
+};
+
+int Data::a[Data::ms_size];
+
+
+
+int int main(int argc, char const *argv[])
+{
+	cout<< Data::getsize()<< endl;
+	return 0;
+}
+
+
+//////////////////////////////////////////////////////////////
+
+
+class Account{
+	double m_interest_rate;
+	const double m_interest_rate;
+	static double m_interest_rate;
+	const static double m_interest_rate;
+	
+public:
+
+
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
