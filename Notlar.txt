@@ -788,6 +788,346 @@ int int main(int argc, char const *argv[])
 }
 
 
+//////////////////////////////////////////////////////////////
+
+class Counter{
+
+public:
+	explicit operator int()const;
+
+};
+
+Primitive türlerde copy init diye birşey yok.
+
+Operator overloading
+// STL'in' temel dayanağı //
+
+T (expr);
+
+
+static-cast
+const-cast
+reinterpret-cast
+dynamic-cast
+
+//////////////////////////////////////////////////////////////
+
+int main(){
+	static_cast<double>(ival) ///Operandı parantez içinde yazmak zorundayız. Syntax zorunluluğu
+	const_cast<double>
+	reinterpret_cast<double>
+	dynamic_cast<double> 	///C'de karşılığı mevcut değil , kalıtımla çalışırken runtime  polymorfizm le alakalı.
+
+
+
+}
+
+#include <cstdlib>
+#include <ctime>
+
+
+int int main(int argc, char const *argv[])
+{
+	dval = static_cast<double>(x)/y;
+	return 0;
+}
+
+
+
+
+
+int int main(int argc, char const *argv[])
+{
+	int x = 10;
+	int y = 20;
+	double dval;
+
+
+	dval =static_cast<double> (x)/y; 
+
+	srand((unsigned int)time(nullptr));
+
+	srand(static_cast<unsigned int>(time (nullptr)));
+
+
+
+
+	const_cast<>
+	return 0;
+}
+
+
+
+char *mystrchr(const char *ptr, int ch){
+	while(*ptr != '0'){
+		if(*ptr == ch)
+			return (char * ptr) //// C hali C++ için return (const_cast<char * > ptr)
+	}
+}
+
+
+reinterpret_cast ===
+
+int int main(int argc, char const *argv[])
+{
+	double dval = 2.3;
+	char *ptr;
+
+
+
+	ptr = char(*)&dval;
+
+	ptr = reinterpret_cast<char*>(&dval);   //// a türünden bir nesnenin adresini b türünden bir nesnenin adresine cast ediyorum. Yani adres sadece
+	///// cast edilir.
+	return 0;
+}
+
+
+
+İki ayrı dönüşümün yapılması::::
+
+ptr = reinterpret_cast<char *>(const_cast<double *>(&dval));
+
+Operator overloading ::
+
+Etrafta bir nesne yoksa operator overloading aracının kullanılmasına gerek yok.
+Her operator yüklenemez.
+nokta operatoru
+::
+sizeof
+? : Koşul operatörü
+.*
+typeid
+overload edilemeyen operatorler
+
+
+Operator Overload Edilmesi
+
+
+class Data{
+public:
+
+	x.operator>(y);   //// x>y;
+	operator>(const Data &r)const;
+
+
+	!myData
+	operator!(const Data &r);
+	operator!()const;
+
+
+	arity  ==== operatorun Unari mi binary mi olması durumuna arity deniliyor.
+
+};
+
+
+Birden fazla anlama gelen operatorler::
+
+*
+&
++
+-
+
+static üye operator fonksiyonu olamaz.!!
+tum operator fonksyionları ismiyle çağrılabilir.
+
+cout << x 
+
+
+
+
+//////////////////////////////////////////////////////////////
+
+
+
+#include <string>
+using namespace std::
+
+
+int main(int argc, char const *argv[])
+{
+	int ival = 13;
+
+	cout << ival;
+	operator<<(cout,ival); /// Global
+
+	cout.operator<<(ival); /// Üye 
+
+
+
+
+
+	return 0;
+}
+
+
+
+
+//////////////////////////////////////////////////////////////
+
+
+
+int main(int argc, char const *argv[])
+{
+	string name1("recep");
+	string name2("orhan");
+
+	if (name1 > name2)
+		cout << name1 << endl;
+
+
+
+	//// if(name1.operator>(name2)) syntax hatası.
+
+	/// Bu şekilde de çağrılabilir.
+
+	if(operator<(name1,name2))
+		cout << name1 << endl;
+
+
+
+	return 0;
+}
+
+
+
+
+//////////////////////////////////////////////////////////////
+
+class Random{
+public:
+		xxx.operator()();
+
+};
+
+Operatorlerin onceligini degistirmemiz mumkun degildir.
+
+
+x * y + z Global
+
+operator+(operator*(x,y),z)
+
+Üye Fonksyion
+(x.operator*(y)).operator+(z)
+
+
+int i = 12;
+double d = 2.3;
+
+cout << i << d << endl;
+
+((cout.operator<<(i)).operator<<(d)).operator<<(endl)
+
+endl geri donus değeri function pointer 'dır'.
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////
+
+class Neco(){
+
+};
+
+
+Neco operator+(const Neco &r1, const Neco &r2){
+	cout << "operator+() cagrıldı " << endl;
+}
+
+
+int int main(int argc, char const *argv[])
+{
+	Neco n1, n2, n3;
+
+	n1  = n2 + n3;
+
+	return 0;
+}
+
+
+STL''de onemli bir  yer alan iki operator var
+
+operator <
+operator ==
+
+Algoritma türden bağımsız template edilmiş fonksiyonlar algoritym kütüphanesi.
+#include <set>
+
+using namespace std;
+
+class Neco{
+
+};
+
+
+int main(int argc, char const *argv[])
+{
+	set<Neco> myset;
+	Neco myneco;
+
+	myset.insert(myneco);
+	return 0;
+}
+
+//////////////////////////////////////////////////////////////
+Friend Bildirimi
+
+Bir sınıf global bir fonksiyona arkadaşlık verebilir.
+Bir sınıf bir başka sınıfın bir üye fonksiyonuna arkadaşlık verebilir.
+
+
+class Neco {
+	int mx;
+public:
+	//friend func(int , int);  /// bir sınıf kendi fonksiyonuna friendlik veremez.
+
+
+};
+
+int func(int a, int b){
+	Neco myNeco ; 
+	myNeco.mx = 10;
+}
+
+class Gurkan{
+public:
+	void func();
+};
+
+
+
+
+class Neco{
+	int mx;
+public:
+	friend class Gurkan;
+};
+
+//////////////////////////////////////////////////////////////
+
+
+Ön ek Son ek overloading
+
+class Date{
+
+public:
+	Date &operator++(); /// Parametre değişkeni olmayan önek
+	Date operator++(int);	/// parametre değişkeni olan sonek
+int main(int argc, char const *argv[])
+{
+	Date mydate;
+	mydate++;
+
+
+
+	return 0;
+}
+};
+
+
+
 
 
 
@@ -797,23 +1137,6 @@ int int main(int argc, char const *argv[])
 
 //////////////////////////////////////////////////////////////
 
-
-//////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////
-
-
-//////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////
