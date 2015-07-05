@@ -27,9 +27,3 @@ public:
 
 
 
-int main(){
-    Dyna *p = Dyna::createObject(45);
-
-    p->display();
-
-}

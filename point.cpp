@@ -11,9 +11,7 @@
 
 
 
-Point::Point(double x = 0. , double y = 0.) : mx{ x } , my{ y } {
-}
-
+Point::Point(double x = 0. , double y = 0.) : mx{ x } , my{ y };
 
 void Point::display() const {
    //// std::cout<<"("<<mx<<")"<<"("<<my<<endl;

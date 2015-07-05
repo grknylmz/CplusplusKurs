@@ -17,7 +17,7 @@ class Myint{
 
 
 
-public Myint(int = 0);
+public Myint(int = 0)
     bool operator<(const Myint &)const;
     friend bool operator <(const Myint &, const Myint &);
     friend bool operator <=(const Myint &, const Myint &);

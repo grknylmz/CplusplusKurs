@@ -1188,6 +1188,472 @@ C++ l-value'dür'
 
 Tür dönüştürme operatör fonksiyonu
 
+friend Myint operator+(const Myint &r1, const Myint &r2)
+{
+	Myint retval(r1);
+	retval += r2;
+	return retval;
+
+
+	return Myint(r1) += r2;
+
+}
+
+
+class Myclass{
+
+	operator int()const;
+}
+
+
+operator int()const{ return mval; }
+int x;
+myintt 
+
+
+Fraction Sınıfı
+
+fraction.h
+#pragma once
+#include <iospwd>
+
+class Fraction /// Bir rasyonel sayıyı temsil ediyor. 
+{
+	Fraction &simplify(); /// Ortak bölenlerinin en büyüğünü bulan bir fonksyiona ihtiyaç var.
+
+
+
+public:
+	Fraction(int nom = 0, int demom = 1);
+	/// F nesnesi dosyaya yazdırılacak -5/7 yazdırırken kesirde olacak eksi
+	/// Yazdırırken sadeleştiricek.
+	friend bool operator<(const Fraction &r1 , const Fraction &r1); 
+	friend bool operator<=(const Fraction &r1 , const Fraction &r1); 
+	friend bool operator>(const Fraction &r1 , const Fraction &r1); 
+	friend bool operator>=(const Fraction &r1 , const Fraction &r1); 
+	friend bool operator==(const Fraction &r1 , const Fraction &r1); 
+	friend bool operator!=(const Fraction &r1 , const Fraction &r1); 
+
+
+	friend Fraction operator+(const Fraction &r1, const Fraction &r2);
+	friend Fraction operator-(const Fraction &r1, const Fraction &r2);
+	friend Fraction operator*(const Fraction &r1, const Fraction &r2);
+	friend Fraction operator/(const Fraction &r1, const Fraction &r2);
+
+	Fraction &operator+=(const Fraction &r);
+	Fraction &operator-=(const Fraction &r);
+	Fraction &operator*=(const Fraction &r);
+	Fraction &operator/=(const Fraction &r);
+
+	Fraction &operator++();
+	Fraction operator++(int);
+	Fraction &operator--();
+	Fraction operator--(int);
+
+	friend std::ostream &operator<<(std::ostream &, const Fraction &);
+	friend std::istream &operator>>(std::istream &, const Fraction &);
+
+
+
+
+	static int gcd(int a, int b);
+	static Fraction rand();
+
+	int nominator()const;
+	int denominator()const;
+
+};
+
+
+Köşeli parantez operatör fonksiyonu
+Fonksiyon çağrı operatör fonksiyonu
+İçerik operatör fonksiyonu
+Ok operatör fonksiyonu
+
+Köşeli parantez operatör fonksiyonu
+Fonksiyon çağrı operatör fonksiyonu
+İçerik operatör fonksiyonu
+Ok operatör fonksiyonu
+
+
+/// Köşeli ayraç işlevini yükleyen işlev
+
+Sınıfın üye işleviyle yüklenebilir.
+a.operator[](b);
+Genellikle bir referans türüne geri döner. Böylelikle işlev çağrı ifadesi doğrudan
+bir nesne olarak kullanılabilir.
+
+class Array{
+	int *m_p;
+	size_t m_size;
+public:
+	Array(int size = 0 ; int val = 0);
+	~Array();
+	int operator[](int) const;
+	int &operator[](int);
+};
+
+Array::Array(int size, int val){
+	m_size = size;
+	if(m_size == 0){
+		m_p = 0;
+		return;
+	}
+
+	m_p = new int[m_size];
+	for(int k = 0 ; k < m_size ; ++k)
+		m_p[k] = val;
+}
+
+Array::~Array(){
+	delete [] m_p;
+}
+
+int Array::operator(int index)const{
+	return m_p[index];
+}
+
+
+#include <iostream>
+
+int main(){
+	Array a(20);
+	const Array ca(10,1);
+	a[3] = 5;
+	// ca[2] = 10; Gecersiz
+	std::cout << ca[5] << std::endl;
+
+	return 0;
+
+}
+
+
+a.operator[](3) = 5;
+
+
+
+Fonksyion Çağrı Operatörü Overload
+#include <iostream>
+using namespace std;
+
+class Distance{
+private:
+	int feet;
+	int inches;
+public:
+	Distance(){
+		feet = 0;
+		inches = 0;
+	}
+	Distance(int f , int i){
+		feet = f;
+		inches = i;
+	}
+
+	Distance operator()(int a, int b,int c){
+		Distance D;
+		D.feet = a + c + 10;
+		D.inches = b + c + 100;
+		return D;
+	}
+
+	void displayDistance(){
+		cout << "F: " << feet << "I:" << inches << endl;
+	} 
+
+};
+
+
+int main(){
+	Distance D1(11,10), D2;
+
+	cout << "First Distance";
+	D1.displayDistance();
+
+	D2 = D1(10,10,10);
+	cout << "Second Distance" ; 
+	D2.displayDistance();
+
+	return 0;
+}
+
+
+Köşeli parantez Overload
+
+using namespace std;
+const int SIZE = 10;
+
+class safearay{
+private:
+	int arr[SIZE];
+public:
+	safearay(){
+		int i;
+		for(i = 0 ; i < SIZE ; i++){
+			arr[i] = i;
+		}
+	}
+
+	int &operator[](int i){
+		if(i > SIZE){
+			cout << "Index out of bounds" << endl;
+			return arr[0];
+		}
+	}
+
+	return arr[i];
+
+};
+
+
+
+int int main(int argc, char const *argv[])
+{
+	safearay A;
+
+	cout << "Value of A[2]" << A[2] << endl;
+	cout << "Value of A[5]" << A[5] << endl;
+	cout << "Value of A[12]"<< A[12]<< endl;
+	return 0;
+}
+
+
+
+Ok operatör fonksiyonu Overload
+Üye fonksiyon olmak zorunda return tipi pointer yada nesne olmalı
+Smart pointer 
+class Ptr{
+
+	X * operator->();
+};
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+class Obj{
+	static int i, j;
+public:
+	void f() const{cout << i++ << endl; }
+	void g() const { cout << j++ << endl; }
+
+};
+
+
+int Obj::i = 10;
+int Obj::j = 12;
+
+class ObjContainer{
+	vector<Obj* obj> a;
+public:
+	void add(Obj* obj){
+		a.push_back(obj);
+	}
+
+	friend class SmartPointer;
+};
+
+class SmartPointer{
+	ObjContainer oc;
+	int index;
+public:
+	SmartPointer(ObjContainer& objc){
+		oc = objc;
+		index = 0;
+	}
+
+	bool operator++()//Prefix version
+{
+	if(index >= oc.a.size())
+		if(oc.a[++index] == 0)
+			return true;
+}
+
+// Overload Operator
+Obj* operator->() const{
+	if(!oc.a[index]){
+		cout << "Zero Value";
+		return (Obj*)0;
+	}
+	return oc.a[index];
+}
+};
+
+
+
+
+//////////////////////////////////////////////////////////////
+
+#include <>
+
+
+class Date{
+	int m_total_days;
+	int m_day, m_mon, m_year;
+	static const int mscYearBase = 1700;
+	static bool isleap(int y);
+	bool isleap()const;
+
+public:
+	Date(int d = 0 ,int m = 0 ,int y = 0 );
+	//////
+
+	friend bool operator<(const Date &r1, const Date &r2);
+	friend bool operator<=(const Date &r1, const Date &r2);
+	friend bool operator>(const Date &r1, const Date &r2);
+	friend bool operator>=(const Date &r1, const Date &r2);
+
+
+	Date operator-(int ndays)const;
+
+	friend int operator-(const Date &, const Date &);
+	Date &operator++();
+	Date operator++(int);
+	Date &operator--();
+	Date operator--(int);
+	operator+=(int ndays);
+	operator-=(int ndays);
+
+
+
+	Date &setMonthDay(int mday);
+	Date &setMonth(int mon);
+	Date &setYear(int year);
+
+
+
+	////Inserter ve extractorlar
+
+	friend std::ostream &operator<<(std::ostream &, const Date &);
+	friend std::istream &operator>>(std::istream &, Date &);
+
+	static Date random();
+
+	int getYear()const;
+	int getMonth()const;
+	int getMDay()const;
+	int getWeekDay()const;  /// 
+	int getYearDay()const;
+};
+
+
+throw BadDate();
+class BadDate{};
+
+int int main(int argc, char const *argv[])
+{
+	Date date1;
+	Date date2(13);
+	Date date3(25,04);
+	Date date4(1,1,1998);
+	Date.date5 =  Date::random();
+
+	if(date5 > date1){
+		date1--;
+	}
+	else
+		date2 = ++date1;
+
+	if(date2 - date3 > 300){
+		date1 += 100;
+	}
+
+	cout << date2 + 125 << endl;
+
+
+
+	return 0;
+}
+
+
+//////////////////////////////////////////////////////////////
+İnterface hafif olmalı gerektiğinden dolu olmamalı
+//////////////////////////////////////////////////////////////
+
+içerik operatör fonksiyonu 
+
+int main(){
+
+	list<int>::iterator iter = mylist.begin(); ///// geri dönüş değeri list<int>::iterator ? 
+
+	auto iter = mylist.begin();
+
+	İçerik operatörünün operandı yaparsak o konumdaki nesneye erişicel.
+	cout << *iter << endl;
+
+	++iter;
+
+	range başlangıç ilk öğe fakat bitiş son+1 . nci öğedir!!!
+
+
+	for(auto iter = mylist.begin() ; iter != mylist.end() ; ++iter)
+		;
+
+	mylist.reverse();
+
+
+
+
+
+}
+
+
+İçerik operatörünün overload edilmesi :
+
+Fonksiyonun geri dönüş değeri nesneye dönmesi için geri dönüş değeri referans olmalı.
+
+
+int main(int argc, char const *argv[])
+{
+	SmartPtr ptr = new Class;
+
+	(*ptr).display();
+	(*ptr).set(346);
+	Myclass m{45};
+	m = *ptr;
+
+
+
+
+	return 0;
+}
+
+Smartpointer'lar' kısmi manada garbage collector işlevinin yerine getirilmesine yardımcı olur.
+
+//////////////////////////////////////////////////////////////
+Template'ler'
+Şablona dayalı kod yazdırımı
+
+
+template<typename T, int size>  
+
+
+
+
+template<typename T>   /// T herşey olabilir.
+class SmartPtr{
+	T *mp;
+public:
+	SmartPtr(T *p): mp (p);
+	~SmartPtr(){
+		delete mp;
+	}
+	T &operator*(){return *mp};
+	T *operator->(){return mp};
+
+
+};
+
+
+template<typename T>
+class List{
+
+};
+int main(int argc, char const *argv[])
+{
+	SmartPtr<Myclass> ptr = new Myclass;
+	SmartPtr<string> p = new string;
+	list<int> mylist;
 
 
 
@@ -1195,34 +1661,118 @@ Tür dönüştürme operatör fonksiyonu
 
 
 
+	return 0;
+}
+
+
+
+
 
 
 //////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
+template<typename Key, typename Value>
+class Map{
+
+};
+
+
+int main(int argc, char const *argv[])
+{
+	Map<int,double> x;
+
+	return 0;
+}
+
+
+
+template<typename Elem, int size>
+
+
+class Array{
+	Elem a[size];
+
+};
+
+
+
+int main(int argc, char const *argv[])
+{
+	Array<int,30> x;
+	return 0;
+}
+
 //////////////////////////////////////////////////////////////
 
+using namespace std:
+class Myclass{
+public:
+	bool operator()(int) // unary predicate
+};
+
+Predigate sınıf
+
+void operator()(){
+	cout << "Myclass::operator()()" << endl;
+}
+
+class Random{
+	int mlow,mhigh;
+public:
+	Random(int low, int high) : mlow(low),mhigh(high){}
+	int operator()(){return rand % (mhigh-mlow +1) + mlow;}
+};
+
+
+
+//////////////////////////////////////////////////////////////
+using namespace std;
+
+int main(int argc, char const *argv[])
+{
+	list<int> mylist;
+
+	srand(static_cast<unsigned>(time(nullptr)));
+	for(int k = 0 ; k < 1000 ; k++)
+		mylist.push_back(rand());
+	
+	return 0;
+}
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
 
 
 
