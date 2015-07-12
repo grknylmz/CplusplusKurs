@@ -2017,13 +2017,253 @@ class TeachingGroup{
 Pointer yada referans olsa idi böyle bir zorunluluk olmayacaktı.
 //////////////////////////////////////////////////////////////
 
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int main(int argc, char const *argv[])
+{
+	vector<string> svec;
+
+	
+	string s("murat arman");
+	svec.push_back(s);
+	svec.push_back(move(s));
+
+	return 0;
+}
+
+-----------------------------------------------------------
+
+
+class Member {
+public:
+	Member &operator=(const Member &){
+		cout << "Member::operator(const Member &)" << endl;
+		return *this;
+	}
+};
+
+class Owner{
+	Member mem;
+};
+
+int main(int argc, char const *argv[])
+{
+	Owner x, y;
+	x = y;
+
+	return 0;
+}
+
+class Sina{
+public:
+	Sina(int);
+};
+
+class Myclass{
+	Sina mx { 5 };
+public: 
+};
+
+int main(int argc, char const *argv[])
+{
+	Myclass a;
+	return 0;
+}
+
+
+
 //////////////////////////////////////////////////////////////
+vector<int> Myclass::ivec{100,12};
+
+
+
+
+
+using namespace std;
+
+class Myclass{
+	class StaticData{
+		std::vector<int> ivec1;
+		std::vector<int> ivec2;
+	};
+	static StaticData ms_instance;
+public:
+
+};
+
+Myclass::StaticData Myclass::ms_instance;
+int main(int argc, char const *argv[])
+{
+	
+	return 0;
+}
+
+Nested Types
+
+class Myclass{
+public:
+	typedef int Color;
+
+};
+
+void Myclass::func(){
+	Color mycolor;
+}
+
+int main(int argc, char const *argv[])
+{
+	Myclass::Color m;
+
+	return 0;
+}
 
 //////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////
+class Myclass{
+	Color mx; /// İsim aramada bulunamaz Error!
+	typedef int Color;
+public:
+};
+
+class Myclass{
+	class Iterator{
+
+	};
+	Iterator m_iter;
+public:
+
+};
+	
+------------------------------------------------		
+myclass.h
+
+class Myclass{
+	class Color;
+public:
+
+};
+
+myclass.CPP
+
+class Myclass::Color{
+public:
+	Color();
+
+};
+
+Myclass::Color::Color();
+
+--------------------------------------------------
+
+myclass.h
+
+
+
+class Myclass{
+
+};
+
+
 
 //////////////////////////////////////////////////////////////
+
+//// Myclass.h
+class Myclass{
+	struct Pimple;
+	Pimple *mp;
+public:
+	Myclass();
+	~Myclass();
+	void display()const;
+};
+
+
+//Cpp
+
+struct Myclass::Pimple{
+	int mx, my;
+	Pimple() : mx(0),my(0){}
+};
+
+
+Myclass::~Myclass(){
+	delete mp;
+}
+
+Myclass::Myclass():mp{new Pimple}{}
+
+void Myclass::dislay()const{
+	mp->mx;
+	mp->my;
+}
+
+
+
+
+//////////////////////////////////////////////////////////////
+
+#include <vector>
+#include <iostream>
+
+
+using namespace std;
+
+int main(int argc, char const *argv[])
+{
+	vector<int>::size_type
+	vector<int>::iterator x;
+
+	vector<int>::iterator::iterator_category //// Nested sınıf iterator , Typedef iteratorCategory
+
+
+
+
+	return 0;
+}
+
+
+
+
+class Vector{
+public:
+	class Iterator{
+	public:
+		typedef int iterator_category;
+	};
+};
+
+
+int main(int argc, char const *argv[])
+{
+	Vector::Iterator::iterator_category
+	return 0;
+}
+
+Konu Başlıkları
+String Sınıfı
+Kalıtım 
+Ezoterik Araçlar
+OOP Genel Araçlar
+STL
+Dosyalar Giriş Çıkış İşlemleri 
+
+
+Belki Regex, Smart Pointer, Thread vs.
+
+
+
+
+
+
+
+
+
+
+
+
 
 //////////////////////////////////////////////////////////////
 
