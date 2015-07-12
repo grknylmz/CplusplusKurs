@@ -1726,7 +1726,28 @@ public:
 
 //////////////////////////////////////////////////////////////
 using namespace std;
+#include <algoritym>
 
+bool isok(int val){
+	return val % 5 == 0;
+}
+
+template<typename T, class U>
+void Countif(,, , , , , , , , U x){
+	if( x())
+}
+
+
+
+
+class Unpred{
+int mx;
+public:
+	Unpred(int val) : mx{val}{}
+	bool operator()(int x){return x % mx == 0; }
+
+
+};
 int main(int argc, char const *argv[])
 {
 	list<int> mylist;
@@ -1734,20 +1755,266 @@ int main(int argc, char const *argv[])
 	srand(static_cast<unsigned>(time(nullptr)));
 	for(int k = 0 ; k < 1000 ; k++)
 		mylist.push_back(rand());
-	
+
+	count_if(mylist.begin, mylist.end, &isok);
+
 	return 0;
 }
 
 //////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////
+#include <iostream>
+#include <string>
+#include <list>
+#include <ctime>
+#include <cstdlib>
+#include <algorithm>
+
+using namespace std;
+
+class Inta{
+	int *mp;
+public:
+	Inta(size_t size) : mp{new int[size]}{
+
+	}; 
+	~Inta(){ delete[]mp;}
+
+	////
+};
+
+Inta getArray(){
+	///,
+	int x = 500;
+	Inta retval(x);
+
+	return retval;
+}
+
+
+int main(int argc, char const *argv[])
+{
+	int size;
+	cin >> size;
+
+	Inta a(size);
+
+	return 0;
+}
+
+int main(int argc, char const *argv[])
+{
+	Inta myarray = getArray();
+
+	return 0;
+}
+
+
+
 
 //////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////
+Sağ Taraf referansı taşıma ve mükemmel gönderim de kullanılmak üzere oluşturulmuş bir araçtır.
+
+Atama operatörünün sol tarafına gelen ifadelere sol taraf değeri gelemeyenlere sağ taraf referansı denir.
+Adres operatörünün operandı olabilen ifadelere sol taraf referansı , olamayanlar sağ taraf referansı denir.
+
+int x = 20;
+int y = 56;
+
+x ve y  l value
+
+x+y R value
+
+345 R value;
+
+func() R value;
+&func() --> error
+
+
+R value ---> &&r
+L value ---> &r
+
+
+------------------------------------------------------------------------------
+int &r = 5 // Error
+
+------------------------------------------------------------------------------
+int func();
+
+int &r = func(); // Error
+------------------------------------------------------------------------------
+
+Sol taraf değeri sağ taraf referansına verilemez.
+-------------
+
+int x = 45;
+int &&r = x; // Error
+int &&r = 56; // Sağ taraf değeri sağ taraf referansına bağlanmış sıkıntı yok.
+
+------------------------------------------------------------------------------
+
+int func();
+
+int &&r = func();
+
+int &func();
+int &&r = func(); /// Error 
+
+------------------------------------------------------------------------------
+
+void func (int &r); /// Sol taraf referansı
+void func(int &&r); /// Sağ taraf referansı Function Overloading
+
+
+
+
+class Inta{};
+
+void func(Inta &r);
+void func(Inta &&r);
+
+---------------------------------------
+
+void func(int &r){
+	cout << "L value" << endl;
+}
+void func(int &&r){
+	cout << "R value" << endl;
+}
+
+
+Amaç function overloading de farklılık yaratım Deep copy yapılırken mmove semantiğinin kullanılmasına olanak vermek.
+---------------------------------------------------------------------------------------------------------------------
+
+Sağ taraf refenrası seçilerek exact match olur.
+
+using namespace std;
+
+
+class Myclass{
+public:
+	Myclass(const Myclass &r);  /// Copy constructor.
+	Myclass(Myclass &&r);		/// Move Constructor
+
+};
+
+
+
+
+
+int main(int argc, char const *argv[])
+{
+	
+
+	return 0;
+}
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+class Vector{
+	int m_size;
+	int *m_p;
+public:
+	Vector(int size) : m_size (size), mp(new int [size]){}
+	Vector(const Vector &r) : m_size(r.m_size){
+		m_p = new int [m_size];
+		for(int k = 0  ; k< m_size; k++){
+			m_p[k] = r.m_p[k];
+		}
+	}
+	Vector(Vector &&r) : m_p(r.m_p), m_size(r.m_size){
+		r.m_p = nullptr;
+	}
+
+};
+
+
+
+
+int main(int argc, char const *argv[])
+{
+	Vector vec(565);
+	vec = getVector();
+
+
+	return 0;
+}
+
+Vector &operator=()
+
+
+/////////////////////////////////////////////////////////////
+
+Association 
+Aggregation Sahiplik
+Composition Ömürsel
+
+Araba araba motoru ilişkisi composition -> araba varsa motor var araba yoksa motor yok. /// Ömürsel birliktelik
+
+Bir sınıfın veri elemanını doğrudan başka bir sınıf elemanı olması.
+1-Elemanı dpğrudan almak
+2-Elemanı conmstructor la alıp destructor la destruck etmek.
+
 
 //////////////////////////////////////////////////////////////
 
+
+using namespace std;
+
+class Engine{
+public:
+	Engine(){
+		cout << "Engine::Engine"<< endl;
+	}
+};
+
+
+class Car{
+	Engine m_e;
+
+};
+
+
+int main(int argc, char const *argv[])
+{
+	Engine e;
+
+	return 0;
+}
+
+
+Bir sınıfın tanımı olmadan kullanılması durumuna incomplete type.
+ama class Engine *e; pointer ile erişim sonucu error olmaz.
+
+class 
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////
+
+#pragma once
+
+class Student{
+	std::string m_name;
+};
+
+
+class TeachingGroup{
+	std::vector<std::string> mvec;
+};
+
+
+Pointer yada referans olsa idi böyle bir zorunluluk olmayacaktı.
 //////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////
