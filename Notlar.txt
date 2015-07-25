@@ -2254,32 +2254,227 @@ Dosyalar Giriş Çıkış İşlemleri
 Belki Regex, Smart Pointer, Thread vs.
 
 
+//////////////////////////////////////////////////////////////
+
+String Sınıfı
+
+typedef basic-string<char> string
+String tipi aslında bir typedef ismi
+char-traits<char>
+
+String dediğimiz sınıfın tam tür ismi :: 
+
+typedef basic_string<char, char_traits , allocator> string
+
+#include <string> // C++
+#include <cstring>// C
+
+using namespace std;
+
+int main(int argc, char const *argv[])
+{
+	
+	return 0;
+}
+C++ 2011 le beraber Regex kütüphanesi de dahil edildi.
+Bazı yazı işlemleri STL algoritym kütüphanesi ile yapılır.
+Sınıfın önemli bir bölümü operatör overloading işlemlerinden oluşuyor.
+
+Bazı karışık işlemler STL le kolay bir şekilde halledilebilir.
+//////////////////////////////////////////////////////////////
+size isimli üye fonksyionu konteynır da tutulan eleman sayısını verir.
+string size dersek string in harf sayısını verir.
+
+string::size_type ///İçsel tür // yazının uzunluğunun türü
+
+string::size_type len = s.length();
+auto len = s.length();
+
+
+size_t nin karşılığı aslen string::size_type
+
+
+string s;
+
+cout << s.size() << endl;
+cout << s.length() << endl;
+s.empty();   == s.size()
+
+
+İki fonskiyonda yazının uzunluğunu vermektedir.
+
+//////////////////////////////////////////////////////////////
+
+string s1("mustafa"); 	//const char * constructor;
+string s2 = "gurkan";
+string s3{ "mehmet" };  //C++11
+
+string s1(12, 'A');  ///// 12 adet A eklenir.  Bir parametre size_type diğeri char
+
+cout << "(" << s1 << ")" << endl;
+
+ 
+
+string s1(s2); /// Copy Constructor
 
 
 
+string s('A'); /// boyle bir char parametreli constructor mevcut değil.
+bunun alternatifleri 	string s1(1,"A");
+						string s1("A");
+
+parametresi char olan atama operatör fonksiyonu var ama parametresi char olan string constructor yok.
+
+string s1("Nurettin");
+string s2(s1 , 3); /// s1 in 3 indeksinden başlayarak
+
+cout << "(" << s2 << ")" << endl;  //ettin
+
+string s2(s1 , 3 , 2);  // et
+
+
+char str[100] = "mustafa";
+
+string s1(str); ///const char * lı constructor
+string s2(str , 5);  ///char * ve size_type parametreli bir constructor mevcut.
 
 
 
+string s1(str+1, str + 5);  //Range based constructor for array
+
+string s1("sina dogru");
+
+string s2(s1.begin , s1.begin() + 4)  /// range based constructor for string container
+
+Initializer List
+
+vector<int> ivec({12 , 45 , 67 , 89 });
+
+string s({ 'a' , 'b' });
+s.insert(1, { 'c' , 'a'} );
+
+
+Listedeki parametrelerin tamamı kullanılıyor.
 
 
 
+string func();
+
+
+string s1("seyfettim");
+
+string s2(move(s1));  ////Move constructor.
+
+string h_em(const string &r);
+{
+	return "<em>" + r + "/em";
+}
+
+Stringi fonksyiona geçerken ideal olan referans göndermek.
+
+
+#include <list>
+
+int main(int argc, char const *argv[])
+{
+	list<char> mylist;
+	mylist.push_back('c');
+	mylist.push_back('a');
+	mylist.push_back('n');
+
+
+	string s(mylist.begin(), mylist.end);
+
+
+	cout << s << endl;
+
+
+	return 0;
+}
 
 
 //////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////
+string s(120 , 'A' );
+
+cout << s.capacity() << endl;
+
+string s;
+string ::size_type cap = 0;
+for (int k = 0 ; k < 10000 ; ++k)}
+{
+	s.push_back('A');
+	if(s.capacity() != cap ){
+		cout << "size = " << s.size() << endl;
+		cout << "capacity" << s.capacity() << endl;
+		cap = s.capacity();
+		getchar();
+	}
+}
 
 //////////////////////////////////////////////////////////////
 
+string s;
+
+s.reserve(120);
+
+s[5] = 'A';  //// runtime hatası
 //////////////////////////////////////////////////////////////
+
+string s(2345, 'x');
+
+s.reserve(200)  ///Yapılamaz kapasite büyür , kapasite küçülmez.
+s.clear(); /// butun elemanları sıfıra çeker.
+s.erase(); /// Butun elemanları sıfıra çeker.
+s.reserve() //Fonksiyonu çağırılarak kapasite büzülmesi istenebilir fakat garantili değildir.İmplimentasyon kabul ederse olabilme ihtiyacı var.
+s.shrink_to_fit();  //Daha garantili 
 
 //////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////
+Elemanlara erişmek
+
+[] ve At fonksyionu
+
+string s("orhankaya");
+
+
+for (int k = 0 ; k < s.size() ; k++ )
+	cout << s[k] << " ";
+
+cout << endl;
+
+s[5]  = 'X';
+s[8] = 'Z';
+
+
+cout << s << endl;
+
+
+
+s.at(k);  //// Farkı exception throw eder.
+
+exception throw ederken r.what(); fonksiyonu hatanın ne olduğu hakkında bilgi verir.
+
+
+string s("orhan");
+(int) s[s.size()] //// C++11 ile birlikte null karaktere ulaşma garantisi var , at de bu yok.
 
 //////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////
+
+s.front() = 'X'; // C++11   
+s.back() = 'X';  // C++11
+
+
+////begin() , end() iterator donduren islevler
+////front() , back() ilk ve son öğreye eriştiren işlevler
+
+
+
+cout << s << endl;
+
+return 0; 
+
 
 
 
