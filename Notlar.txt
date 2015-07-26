@@ -2477,6 +2477,123 @@ return 0;
 
 
 
+npos değeri static const bir veri elemanı string sınıfının
+
+class string {
+public:
+	const static size_type npos;
+
+};
+
+
+Statik veri elemanına herzaman :: ile ulaş
+
+string::npos // işaretsiz bir tamsayıdır
+string s("murat aksoy");
+auto idx = s.find('a');
+string size_type idx = s.find('a');
+
+if(idx == string::npos)
+	cout << "bulunamadi" << endl;
+
+
+Bütün arama fonksiyonlarının geri dönüş değeri doğru olması npos 'uyla' alaka
+Arama fonksiyonun geri dönüş değeri npos a eşit ise bulunup bulunamamsıdır.
+
+
+
+template <typename T , typename U = char_traits<T>, typename A = allocator<T>>
+class basic_string{
+
+};
+
+String sınıfının template açılımı
+
+npos arama işlemleri ve geri kalan karakterlerinin hepsinin alınmasında kullanılması.
+
+
+s.append
+s.assign
+s.at
+s.front
+s.back
+s.begin
+s.capacity
+s.cbegin
+s.cend
+s.clear
+s.reverse
+
+
+
+string s("murat aksoy");
+
+cout << s[0] << endl;
+
+*s.begin();
+*s.end;
+
+
+string::iterator iter1 = s.end();
+string::iterator iter2 = s.begin();
+
+
+
+int main(int argc, char const *argv[])
+{
+	string s("recepmutlu");
+	sort(s.begin,s.end); //kucukten buyuge sorgular
+
+	cout << s << endl;
+	cout 
+	return 0;
+}
+
+
+
+int main(int argc, char const *argv[])
+{
+	vector<string> svec{"orhan" , "necat", "emre" ,"ozkan"};
+
+	sort(svec.begin(),svec.end()
+	return 0;
+}
+
+
+
+
+*max_element(s.begin(),s.end())  max element iterator dondurmekte dondurdugu elemana erişmek için içerik operatörünü kullanmak gerekir.
+okuma amaçlı yapılan işlemlerde 
+cbegin
+cend fonksiyonları kullanılabilir.
+rbegin
+rend fonksiyonları algoritmaların sondan başa doğru çalıştırılmasına izin veriyor.
+
+
+
+
+
+reverse iterator  aracı ile algoritmaları kullanırken tersten yazdırabiliriz.
+
+using namespace std;
+
+template <typename Iter>
+void DisplayRange(Iter beg, Iter end){
+	while (beg != end)
+		std::cout << *beg++;
+	std::cout << endl;
+} 
+
+
+int main(int argc, char const *argv[])
+{
+	/* code */
+	return 0;
+}
+
+
+s.substr() // Parametresiz hali stringin tamamını döndürmektedir.
+s.substr(8) //8. elemandan itibaren kalan bütün char lar
 
 
 
@@ -2484,26 +2601,117 @@ return 0;
 
 
 
+int main(int argc, char const *argv[])
+{
+	string filename;
+
+	cout << "dosya ismi:";
+	cin >> filename;
+
+	auto idx = filename.rfind('.');
+
+	if(idx == string::npos){
+		cout << "dosya uzantisi yok" << endl;
+
+	}
 
 
 
+	else{
+
+	}
+	return 0;
+}
+
+
+Resize container larda kapasiteyi değil karakter kapasitesini ayarla.
+
+
+int main(int argc, char const *argv[])
+{
+	string s("ali");
+
+	s.resize(8 , 'x');
+
+	s.resize(2);  /// Kucultme islemi
+
+
+	return 0;
+}
+
+
+lexicographical_compare
+
+container compare
+
+karşılaştırma operator fonksyionlarının char paramtresi yok.
+
+
+string name{"necatiergin"};
+name.compare(3, 3, "atil" , 3);
+
+
+insert fonksiyonu
+Geri dönüş değeri insert edilen fonksiyonun yeri
+
+
+svec.insert(svec.begin , "murat");
+
+
+index ile set edilen nesnelerin ger dönüş değeri stringin kendisini
 
 
 
+string s1{"gurkan"};
+string s2{"xyz"};
+
+s1.insert(3 , s2);   ////gurkxyzan
+s1.insert(s1.begin(), 10 , 'x');
+
+.erase( iterator ) O konumda olan elemanı siler.
+.erase( beg , end) o aralıktaki elemanları siler.
+
+stringleri silme:
+string s{"recepmutlu"};
+s="";
+s.resize(0);
+
+s.erase(s.begin()+ 3 , s.begin +5);
+Replace fonksiyonu
+
+Data fonksiyonu
+
+#include <string.h>
 
 
+using namespace std;
+int main(int argc, char const *argv[])
+{
+	int x;
+	string base{"image"};
+
+	to_string() fonksiyonu ile stringe istenilen tür çevrilebilir.
+
+	return 0;
+}
+
+Yazının içinden tamsayıyı çekmek
+
+int main(int argc, char const *argv[])
+{
+	string s("2345Ali");
+	size_t uval;
 
 
+	auto x = stoi(s, &uval);
+	cout << x << endl;
+	cout << uval << endl;
+
+	return 0;
+}
 
 
-
-
-
-
-
-
-
-
+Inheritance ( Türetme )
 
 
 
