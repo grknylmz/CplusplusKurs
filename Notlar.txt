@@ -161,7 +161,7 @@ struct da heryer public
 class içerisinde değişken.
 
 Sınıfın elemanları:
-Data Members		/// Tipik olarak private olarak konulur, protected kalıtım ile devreye girecek
+Data Members        /// Tipik olarak private olarak konulur, protected kalıtım ile devreye girecek
 -Static 
 -Non Static
 Member Functions 
@@ -213,17 +213,17 @@ using namespace std;
 class Account{
 public:
 
-    string getAccountName();
-    void transfer(Account &r, double sum);
+	string getAccountName();
+	void transfer(Account &r, double sum);
 };
 
 int main(){
-    Account necati;
-    Account sina;
+	Account necati;
+	Account sina;
 
-    necati.transfer(sina,1000);
+	necati.transfer(sina,1000);
 
-    return 0;
+	return 0;
 }
 
 
@@ -233,20 +233,20 @@ int main(){
 using namespace std;
 
 class Account{
-    string name;
-    double sum;
-    mutable int callCounter; ///mutable kullanılarak const fonksiyonuyla çağrılabilir hale getirtilir.
+	string name;
+	double sum;
+	mutable int callCounter; ///mutable kullanılarak const fonksiyonuyla çağrılabilir hale getirtilir.
 
 public:
-    void display()const;
-    
+	void display()const;
+	
 };
 
 
 
 void Account::display() const {
-    callCounter++;////Sınıfın veri elemanı değiştirilemez
-    
+	callCounter++;////Sınıfın veri elemanı değiştirilemez
+	
 
 }
 
@@ -256,7 +256,7 @@ void Account::display() const {
 int main(){
    
 
-    return 0;
+	return 0;
 }
 
 
@@ -392,7 +392,7 @@ Point() = default; ///C++ 11
 friend std::ostream &operator<<(std::ostream &os, const Point &r){
 	return os << r.mx << r.my << endl;
 
-} 			
+}           
 
 
 
@@ -449,29 +449,29 @@ C++ da new operatorleri nesnenin adresini verir.
 using namespace std;
 
 class Dyna{
-    int mx;
-    Dyna(int x): mx{x}{}
+	int mx;
+	Dyna(int x): mx{x}{}
 
 
 
 public:
-    static Dyna *createObject(int val){
-        return new Dyna(val);
-    }
+	static Dyna *createObject(int val){
+		return new Dyna(val);
+	}
 
-    void display()const{
+	void display()const{
 
-    }
+	}
 
 };
 
 
 
 int main(){
-    Dyna *p = Dyna::createObject(45);
+	Dyna *p = Dyna::createObject(45);
 
-    p->display();
-    
+	p->display();
+	
 }
 
 
@@ -486,19 +486,19 @@ using namespace std;
 
 
 class Complex{
-    Complex(double r, double i); /// kartezyen
-    Complex(double angle, double distance , int kutupsal); // kutupsal
+	Complex(double r, double i); /// kartezyen
+	Complex(double angle, double distance , int kutupsal); // kutupsal
 
 public:
 
-    static Complex *createCarte(double r, double i){
-        return new Complex(r,i);
-    }
-    
-    
-    static Complex *createPolar(double angle, double distance , int kutupsal){
-        return new Complex(angle , distance , kutupsal);
-    }
+	static Complex *createCarte(double r, double i){
+		return new Complex(r,i);
+	}
+	
+	
+	static Complex *createPolar(double angle, double distance , int kutupsal){
+		return new Complex(angle , distance , kutupsal);
+	}
 };
 
 
@@ -509,7 +509,7 @@ public:
 int main(){
 
 
-    return 0;
+	return 0;
 }
 
 Singleton ::
@@ -700,7 +700,7 @@ int int main(int argc, char const *argv[])
 {
 	T a[100]; /// default init.
 	T x; ////Default initialization
-	T x(10);	T x{10};	/// Value init
+	T x(10);    T x{10};    /// Value init
 	T x = 100 /// Copy init copy constructor çağrılır.
 
 	T x(19);
@@ -816,7 +816,7 @@ int main(){
 	static_cast<double>(ival) ///Operandı parantez içinde yazmak zorundayız. Syntax zorunluluğu
 	const_cast<double>
 	reinterpret_cast<double>
-	dynamic_cast<double> 	///C'de karşılığı mevcut değil , kalıtımla çalışırken runtime  polymorfizm le alakalı.
+	dynamic_cast<double>    ///C'de karşılığı mevcut değil , kalıtımla çalışırken runtime  polymorfizm le alakalı.
 
 
 
@@ -1114,7 +1114,7 @@ class Date{
 
 public:
 	Date &operator++(); /// Parametre değişkeni olmayan önek
-	Date operator++(int);	/// parametre değişkeni olan sonek
+	Date operator++(int);   /// parametre değişkeni olan sonek
 int main(int argc, char const *argv[])
 {
 	Date mydate;
@@ -1148,32 +1148,32 @@ Ortada bir neden yoksa call by value yapmayın, call by reference yapın.
 
 #pragma once;
 class Myint{
-    public Myint(int = 0);
-    bool operator<(const Myint &)const;
-    friend bool operator <(const Myint &, const Myint &);
-    friend bool operator <=(const Myint &, const Myint &);
-    friend bool operator >(const Myint &, const Myint &);
-    friend bool operator >=(const Myint &, const Myint &);
-    friend bool operator ==(const Myint &, const Myint &);
-    friend bool operator !=(const Myint &, const Myint &);
+	public Myint(int = 0);
+	bool operator<(const Myint &)const;
+	friend bool operator <(const Myint &, const Myint &);
+	friend bool operator <=(const Myint &, const Myint &);
+	friend bool operator >(const Myint &, const Myint &);
+	friend bool operator >=(const Myint &, const Myint &);
+	friend bool operator ==(const Myint &, const Myint &);
+	friend bool operator !=(const Myint &, const Myint &);
 
-    friend Myint operator+(const Myint&, const Myint &);
-    friend Myint operator-(const Myint&, const Myint &);
-    friend Myint operator/(const Myint&, const Myint &);
-    friend Myint operator*(const Myint&, const Myint &);
-    friend Myint operator%(const Myint&, const Myint &);
+	friend Myint operator+(const Myint&, const Myint &);
+	friend Myint operator-(const Myint&, const Myint &);
+	friend Myint operator/(const Myint&, const Myint &);
+	friend Myint operator*(const Myint&, const Myint &);
+	friend Myint operator%(const Myint&, const Myint &);
 
-    Myint &operator+=(const Myint &r)
-    Myint &operator-=(const Myint &r)
-    Myint &operator*=(const Myint &r)
-    Myint &operator/=(const Myint &r)
+	Myint &operator+=(const Myint &r)
+	Myint &operator-=(const Myint &r)
+	Myint &operator*=(const Myint &r)
+	Myint &operator/=(const Myint &r)
 
 
-    Myint &operator++();
-    Myint operator++(int);
-    
-    Myint &operator--();
-    Myint operator--(int);
+	Myint &operator++();
+	Myint operator++(int);
+	
+	Myint &operator--();
+	Myint operator--(int);
 };
 
 
@@ -1895,7 +1895,7 @@ using namespace std;
 class Myclass{
 public:
 	Myclass(const Myclass &r);  /// Copy constructor.
-	Myclass(Myclass &&r);		/// Move Constructor
+	Myclass(Myclass &&r);       /// Move Constructor
 
 };
 
@@ -2137,7 +2137,7 @@ public:
 
 };
 	
-------------------------------------------------		
+------------------------------------------------        
 myclass.h
 
 class Myclass{
@@ -2305,7 +2305,7 @@ s.empty();   == s.size()
 
 //////////////////////////////////////////////////////////////
 
-string s1("mustafa"); 	//const char * constructor;
+string s1("mustafa");   //const char * constructor;
 string s2 = "gurkan";
 string s3{ "mehmet" };  //C++11
 
@@ -2320,7 +2320,7 @@ string s1(s2); /// Copy Constructor
 
 
 string s('A'); /// boyle bir char parametreli constructor mevcut değil.
-bunun alternatifleri 	string s1(1,"A");
+bunun alternatifleri    string s1(1,"A");
 						string s1("A");
 
 parametresi char olan atama operatör fonksiyonu var ama parametresi char olan string constructor yok.
@@ -2712,6 +2712,164 @@ int main(int argc, char const *argv[])
 
 
 Inheritance ( Türetme )
+
+necatiergin2013@gmail.com 
+
+Private ve protected türetmesi
+
+Public türetmesi -> is-a türetmesi
+
+incomplete type dan türetme olmaz , derleyici complete type ini görerek türetme yapar. Bir sınıf kendisinden doğrudan türetilemez.
+
+
+
+//////car.h
+class Car{
+
+};
+
+class Bmw : public Car{  //// Türetme
+
+};
+
+
+
+Türetmede hiçbir anahtar sözcük kullanılmazsa (public kullanımaz ise mesela) yine türetme yapılabilir. Ama private türden olur.
+
+
+class Base{
+public:
+	void f1();
+	void f2();
+};
+
+class Der : public Base{
+	int mz, mt;
+public:
+	void f3();
+	//// Der sınıfının 3 tane fonksiyonu var.
+
+};
+
+
+int main(int argc, char const *argv[])
+{
+	Der myder;
+	myder.f1();
+	myder.f2();
+	myder.f3();
+
+
+	return 0;
+}
+
+
+
+
+int main(int argc, char const *argv[])
+{
+	Employee *emp;
+	SalesManager *smp = static_cast<SalesManager *>(emp);
+
+
+	smp->func();
+
+
+	return 0;
+}
+
+
+class Base{
+public:
+
+};
+
+class Der  : public Base{
+public:
+
+};
+
+int main(int argc, char const *argv[])
+{
+	Der myder;
+	return 0;
+}
+
+
+
+
+class Manager  :  public Employee{
+public:
+	using Employee::Employee; ///C++11 ile gelen inherited constructor, constructor ı yazma görevini artık bu koda veriyoruz.
+
+};
+
+
+
+
+class Base{
+	int mx;
+public:
+	Base(int x): mx{ x }{} 
+};
+
+class Der : public Base{
+public:
+	using Base::Base;
+};
+
+
+int main(int argc, char const *argv[])
+{
+	Der myder(10);
+	return 0;
+}
+
+
+
+Destructorlar ve inheritance:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
