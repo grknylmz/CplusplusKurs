@@ -2829,6 +2829,345 @@ int main(int argc, char const *argv[])
 
 Destructorlar ve inheritance:
 
+1. Runtime Polymorphism 
+2. Data Abstraction
+
+Data Abstraction (Elamanları gizle, interface i ayır , client kodlar işi yapsın , problem domanindeki varlık kolayca kullanılabilsin.)  - Inheritance (Kalıtım , kod tekrarırının 
+	önlenmesi , public interface alınarak türetme yapıyoruz.) - 
+
+
+}
+
+
+
+class Base{
+public:
+	Base(int);
+	Base(double,double);
+};
+
+class Der : public Base{
+	using Base::Base;
+};
+
+
+Bizim yazdığımız constructor 'ın' inherited constructor a göre önceliği mevcut.
+Varsayılan argüman inherit edilmiyor. //Const expr önemli
+
+Using Keyword'unun' kullanıldığı durumlar :
+
+using namespace std; /// Namespace bildirimleri.
+yada
+using std::cout;
+
+
+
+
+typedef int Word;  --> C++11 öncesi ve C
+
+Typedef 'in' using bildirimi ile yapılması
+
+using Word = int;  /// Using ile typedef 
+using Fptr = int(*)(int , int);
+
+Bazı işlemler eski typedef le yapılamazken C++11 ile gelen using kullanımı daha fazla hareket kabiliyetine sahip.
+Türemiş sınıfın kendi scope una dahil edilme olayı using bildirimi ile yapılabilir.
+
+
+class Base{
+public:
+	void func(int);
+};
+
+class Der : public Base{
+public:
+	void func();
+
+};
+
+
+int main(void)
+{
+	Der myder;
+
+	myder.func(); ///Gecersiz
+	myder.Base::func();
+
+	return 0;
+}
+
+
+Maskelemenin aşılamadığı tek yer iç blok dış blok maskelemesi
+
+
+class Base{
+public:
+	void func(int);
+};
+
+class Der : public Base{
+public:
+	void func();
+	using Base::func();  /// Using in üst sınıfda kullanımı.
+
+};
+
+
+int main(void)
+{
+	Der myder;
+
+	
+
+	return 0;
+}
+
+using 'in' inherited constructor ile kullanımı
+
+class Base{
+public:
+	Base(int);
+};
+
+class Der : public Base{
+public:
+	using Base::Base();
+};
+
+
+////////////
+
+class Base{
+public:
+	Base(){
+		cout << "Base::Base()" << endl;
+	}
+	Base(const Base &){
+		cout << "const Base &" << endl;  ///Copy Constrctor.
+	}
+};
+
+
+
+class Der : public Base{
+	Der(){}
+	Der(const Der &r) : (Base (r)){   ///Copy Constructor.
+
+	}
+};
+
+
+int main(int argc, char const *argv[])
+{
+	Der d1;
+	Der d2(d1);  /// Burada copy constructot çağrılır.
+
+	return 0;
+}
+
+
+Türemiş sınıf için copy constructpr yazılırken , taban sınıfın copy constructor ının çağrılması için çağrılması gerekir. Eğer derleyiciye bırakılırsa bu iş default constructor
+çağrılır.
+
+Atama Operator Fonksiyonu : 
+
+
+class Base{
+public:
+	Base &operator=(const Base &r){
+		cout << "Base::Base(const Base &r)" << endl;
+		return *this;
+	}
+};
+
+
+class Der : public Base{
+public:
+	Der &operator=(const Der &r){
+		cout << "Der::operator=(const Der &r)" << endl;
+		Base::operator(r);
+		return *this;      //// Veya şu şekildede yazılabilirdi ((Base *)this)->operator=(r); // Doğru ama gereksiz.
+
+	}
+
+};
+
+int main(int argc, char const *argv[])
+{
+	Der d1,d2;
+
+	d1 = d2;
+
+	return 0;
+}
+
+
+
+
+///////////////////////////////////
+
+
+using namespace std;
+class Base{
+public:
+	static void sfunc();
+
+};
+
+
+class Der : public Base{
+public:
+
+};
+
+
+int main(int argc, char const *argv[])
+{
+
+	Der::sfunc();
+	Base::sfunc(); 
+
+	/// static sfunc iki şekildede çağrılabilir.
+	
+
+
+
+	Der myder;
+	Base &r = myder;
+
+	r.sfunc();   //// Base in sfunc() ı çağırılır.
+
+
+	return 0;
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+																Runtime Polymorphism Çalışma Zamanı Çokbiçimliliği
+
+
+class Employee{
+public:
+	void display()const{
+		cout << "I am an Employee" << endl;
+	}
+};
+
+
+class Manager : public Employee{
+	void display()const{
+		cout << "I am an Manager" << endl;
+	}
+};
+
+
+class Driver : public Employee{
+	void display()const{
+		cout << "I am an Driver" << endl;
+	}
+};
+
+
+class Cook : public Employee{
+	void display()const{
+		cout << "I am a Cook" << endl;
+	}
+	
+};
+
+
+
+
+int main(int argc, char const *argv[])
+{
+	Manager m;
+	m.display();
+
+	Manager m;
+	Driver d;
+	Cook c;
+
+	Employee *ptr = &m;
+	ptr->display(); /// İsim arama employee 'de' yapılcak çağrılan fonksiyon Employee 'nin ' fonksyionu olucak.
+
+
+////Virtual eklendiğinde kimin nesi kullanılırsa onun fonksiyonları gelmekte.
+
+	return 0;
+}
+
+
+
+
+
+
+#include <ctime>
+
+void func(Employee *ptr){
+	ptr->display();
+}
+
+int main(int argc, char const *argv[])
+{
+	srand((unsigned)time(nullptr));
+
+	for(; ;){
+		switch(rand() % 4){
+			case 0: cout << "Case Manager" <<endl; func(new Manager); break;
+			case 1: cout << "Case Driver" <<endl; func(new Driver); break;
+			case 2: cout << "Case Cook" <<endl; func(new Cook); break;
+		}
+		getchar();
+
+	}
+
+	return 0;
+}
+
+C++ 'da' new anahtar sözcüğünün geri dönüş değeri adrestir.
+
+Fonksyiona ne gönderirsen artık fonksiyon ona göre çalışmaya başlayacak Runtime Polymorphism sayesinde.
+
+
+
+class Airplane{  //// Polymorphic sınıf.
+public:
+	void func();
+	virtual void foo(); /// Virtual function
+	virtual void g() = 0;  /// 0 olması gerekiyor abstract metodlar kullanılırken. Bunun imlementasyonu null. Pure virtual function
+};
+
+
+Virtual olmayan fonksyionun override edilmesi gibi durum söz konusu değil.
+Virtual keyword ü sadece bildirimde yer alacak. Taban sınıfın bir sanal fonksiyonunu override edebilmek için öyle bir fonksiyon blidirilicekki geri dönüüş değeri ve parametrik
+yapısı aynı olmak zorunda.
+
+
+Virtual fonksiyonla aynı imzaya sahip farklı geri dönüş değerli *error* 
+Eğer tabanın fonksiyonu ezilmişse override edilmiş fonksiyon çağrılır.
+Static üye fonksyinlar virtual olamaz. Destructor sanal olur.
+
+
+Sanallık mekanizmasının devreye girmeme durumları : 
+
+
+int main(int argc, char const *argv[])
+{
+	Manager m;
+	Employee e;
+
+	e = m;   ///    Object slicing büyük bilgili elemanı küçüğe atama durumu 
+
+
+	return 0;
+}
+
+
+
+	Taban sınıf nesnesi yolu ile sanallık mekanizması devreeye girmez.
+	Referans yada pointer yolu ile atama yapılmalı.  Eğer abstraction özellikleri kullanılmak istenirse.
+
+	Static Binding veya Early Binding      ||       Dynamic Binding veya Late Binding
 
 
 
@@ -2837,22 +3176,21 @@ Destructorlar ve inheritance:
 
 
 
+	void func(Employee *ptr){
+		ptr->vfunc();
+	}
+
+	vptr -> virtual table pointer Sanal fonksiyon tablosu diye runtime in başlangıcında bir veri yapısı oluşturuyor. vtable indexleri mevcut , bu indekslere karşılık
+	sanal fonksiyonun adresleri mevcut. bütün sanal fonksiyon elemanlarının adresleri bu tablolarda tutuluyor. 
+
+	Maaliyeti 2 kere indirection işlemi mevcut İşlemci Maaliyeti
+	Her nesne için bir pointer olması bellekte maaliyet yaratır. 
+	
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+	
 
 
 
