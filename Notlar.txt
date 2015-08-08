@@ -1203,7 +1203,7 @@ friend Myint operator+(const Myint &r1, const Myint &r2)
 class Myclass{
 
 	operator int()const;
-}
+};
 
 
 operator int()const{ return mval; }
@@ -3187,23 +3187,292 @@ int main(int argc, char const *argv[])
 	Her nesne için bir pointer olması bellekte maaliyet yaratır. 
 	
 
+	class Shape{
+	public:
+		virtual void draw();
+
+	};
+
+
+	class Triangle : public Shape{
+	public:
+		int draw();  //// Syntax hatası
+	};
+
+
+	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////
+
+
+	class Shape{
+	public:
+		virtual void draw();
+		void falanca(int);
+		int foo(int);
+
+	};
+
+
+	class Triangle : public Shape{
+	public:
+		virtual void draw(int);  //// Artık draw yeni bir fonksyion tanımlanması
+	};
+
+	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////
+	class Shape{
+	public:
+		virtual void draw(int);
+	};
+
+	class Square : public Shape{
+	public:
+		void draw(int)override;  //// Override anahtar sözcüğü
+
+	};
+
+	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////
+
+	contextual keywords : Bağlama ilişkin anahtar sözcük ( override , final )
+
+
+	class Myclass final{
+
+	}; /// Artık bu sınıftan türetilme yapılmasın error
+
+	class Base{
+
+	};
+
+
+	class Der final : public Base{
+		//// artık Der sınıfı türetilemez final anahtar sözcüğü olduğu için.
+	};
+
+	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////
+
+
+	class Base{
+	public:
+		virtual void func()const;
+	};
+
+	class Der : public Base{
+	public:
+		virtual void func()const override final;
+	};
+
+	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////
+
+	class Base{
+	public:
+		virtual void vfoo();
+		void func(){
+			cout << "Base::func()" << endl;
+			vfoo();
+		}
+
+	};
+
+
+	class Der : public Base{
+	public:
+		virtual void vfoo()override{
+			cout << "Der::vfoo" << endl;
+		};
+	};
+
+	int main(int argc, char const *argv[])
+	{
+		Der myder;
+
+		myder.func();
+		return 0;
+	}
+
+
+	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////
+
+	Constructor içinde yapılan sanal fonksiyon çağrıları sanal fonksiyonlara bağlanmaz!
+	Sanallık durumu nerelerde devreye girmez
+	Taban sınıf nesnesi ile devreye girmişse
+	Constructor ve destructor kullanımında 
+	Çözünürlük operatörü çağrısıyla yapılırsa devreye girmez
+
+
+	Virtual Destructor
+	Taban sınıfın destructor ını virtual yapmalıyızz. Türemiş sınıf nesnesini taban sınıf pointer ıyla delete ederken virtual etmemiş olursak türemiş sınıfın destructor
+	ı çağrılmıyor.
+
+	Destructor sanal olabilir mi ? Polymorphic sınıflarda destructor lar herzaman sanal olmalı.
+
+	Constrcutor sanal olabilir mi ? 
+
+	class Employee{
+	public:
+		virtual ~Employee() = default;
+		virtual Employee *createSimilar()
+		{
+			return new Employee;
+		}
+		virtual string getName()const{
+			return "Employee";
+		}
+	};
+
+	class Manager : public Employee{
+	public:
+		virtual Employee *createSimilar()override{
+			return new Manager;
+		}
+
+		virtual string getName()const override{
+			return "Manager";
+		}
+
+	};
+
+
+	class Driver : public Employee{
+	public:
+		virtual Employee *createSimilar()override{
+			return new Driver;
+		}
+
+		virtual string getName()const override{
+			return "Driver";
+		}
+	};
+
+
+	class Accountant : public Employee{
+	public:
+		virtual Employee *createSimilar()override{
+			return new Accountant;
+		}
+
+		virtual string getName()const override{
+			return "Accountant";
+		}
+	};
+
+
+	class Cook : public Employee{
+	public:
+		virtual Employee *createSimilar()override{
+			return new Cook;
+		}
+		
+		virtual string getName()const override{
+			return "Cook";
+		}
+	};
+
+	void chatRoom(Employee *ptr){
+
+	}
+
+	int main(int argc, char const *argv[])
+	{
+		
+
+		Employee *pnew  = ptr->createSimilar();
+
+
+		srand (static_cast<unsigned>(time(nullptr)));
+		switch(rand() % 4){
+			case 0: cout << "Manager case" << endl; chatRoom(new Manager); break;
+			case 1: cout << "Driver case" << endl; chatRoom(new Driver); break;
+			case 2: cout << "Accountant case" << endl; chatRoom(new Accountant); break;
+			case 3: cout << "Cook case" << endl; chatRoom(new Cook); break;
+		}
+		return 0;
+	}
+
+
+Double Dispatch
+
+class Car{
+public:
+	virtual ~Car();
+};
 
 
 
+class Opel : public Car{
+public:
+
+};
+
+
+class Mercedes : public Car{
+public:
 	
+};
+
+
+class Bmw : public Car{
+public:
+	
+};
+
+
+void  game(Car *p1 , Car *p2){
+
+}
 
 
 
 
 
+int main(int argc, char const *argv[])
+{
+	
+	return 0;
+}
 
 
 
 
+	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////	/////////////////////
 
 
+class Employee{
+public:
+	virtual void vfunc(); 
+};
+
+void gfunc(Employee *ptr){
+	ptr->vfunc();
+}
+
+class Manager : public Employee{
+
+};
+
+int main(int argc, char const *argv[])
+{
+	
+	return 0;
+}
+
+Soyut sınıfları pointer veya referans ile kullanımı mümkün.
 
 
+class Car{
+public:
+	void start();
+	virtual void run();
+	virtual void accelerate() = 0 ;  /// bunun implementasyonu yok içi boş !! Bump bump bump
+};
+
+Artık Car sınıfı abstract bir sınıfıtr.
+
+int main(int argc, char const *argv[])
+{
+	Car myCar; /// Abstract sınıftan eleman oluşturulamaz.
+	///Soyut sınıflar türünden nesneler oluşturulamaz.
+	
+	return 0;
+}
 
 
 
