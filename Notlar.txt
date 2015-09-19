@@ -3601,11 +3601,34 @@ template <typename T>
 void func(int (*fp)(T)){
 	cout << typeid(T).name() << endl;
 	cout << typeid(fp).name() << endl;
-	
+
 }
 
 
 
+using namespace std;
+
+template<class T>
+void func(T x){
+	cout << "template function" << endl;
+}
+
+void func(int x){
+	cout << "nontemplate function ... func(int)" << endl;
+}
+
+int main(int argc, char const *argv[])
+{
+	func(10.5);
+	func(34);
+	func(5u);
+
+	///Explicit template argument kullanılır ise;
+
+
+	func<int>(10);
+	return 0;
+}
 
 
 
