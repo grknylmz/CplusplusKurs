@@ -3633,33 +3633,200 @@ int main(int argc, char const *argv[])
 
 
 
+19.09.2015 C++
+Iteratorler
+
+Konum bilgisi tutan smart pointerlara sahip containerlar
+
+template<typename Iter>
+void algo(Iter beg, Iter end){ ///Beg dahil end hariç iteratorler konusunda hiçbir kontrol yapmamakta.
+	while(beg != end){
+		*beg = 
+
+		beg++;
+
+	}
+}
+
+Hiçbir algortima hiçbir konteynıra eleman ekleyemez  , eleman silemez. 
+O kontrol konteynıra atil.
+Neden birsürü remove algoritması var ? 
+
+
+int main(int argc, char const *argv[])
+{
+	vector<string> svec{"ali" , "veli" , "hakan" , "selami" , "tuncer"};
+	reverse(svec.begin() , svec.end());
+
+	for(auto &x ; svec)
+		cout << x << "";
+
+
+	list<string> svec{"ali" , "veli" , "hakan" , "selami" , "tuncer"};
+	for(auto &x : slist)
+		cout << x << " ";
+
+	cout << endl;
+
+
+
+	return 0;
+}
+
+
+
+using namespace std;
+
+using Con = vector<int>;
+using Iter = Con::iterator;
+
+int main(int argc, char const *argv[])
+{
+	cout << typeid(Iter::iterator_category).name() << endl;
+
+
+	return 0;
+}
+
+input iterator
+*iter
+iter->
+iter1 != iter2
+++iter
+iter++
+
+
+output iter
+*iter
+iter->
+
+
+vector array strşng deck -> random acces iterator kategorisine sahip
+
+int main(int argc, char const *argv[])
+{
+	list <int> mylist(129);
+	sort(mylist.begin() , mylist.end()); //Compile time hatasına sebep olur
+
+
+	return 0;
+}
+
+
+Copy algorithm
+
+temolate<typename InIter, typename OutIter>
+OutIter Copy(InIter beg, InIter end, OutIter destbeg){
+	while (beg =! end)
+		*beg++ = *destbeg++;
+	return destbeg;
+}
+
+int main(int argc, char const *argv[])
+{
+	list<int> mylist{12, 34, 65, 1 , 5 ,9 , 3};
+	vector<int> myvec(7);
+
+	Copy(mylist.begin(), mylist.end(), myvec.begin());
+
+	for(auto &x : myvec){
+		cout << x << " ";
+	}
 
 
 
 
 
+	return 0;
+}
+
+
+
+cupa.h
+
+
+#include <algorithm>
+
+template<typename C, typename F>   ///Countainer - Funcdir
+void fc(C &c, size_t n, F f){
+	std::generate_n(std::inserter(r, r.begin()), n, f);
+}
+
+
+template<typename C>
+void display(const C &c){
+	for(auto &r : c)
+		std::cout << r << " ";
+	std::cout << std::endl;
+}
+
+
+void randomize(){
+	srand(static_cast<unsigned>(time(nullptr)));
+}
+
+template<typename InIter>
+void display(Initer ge, Initer end){
+	while (beg != end )
+		std::cout << *beg++ << " ";
+	std::cout<< "\n" << std::endl;
+
+}
+
+std::string rs();
+std::ostream sl(std::ostream &);
 
 
 
 
+/////main
+int main(int argc, char const *argv[])
+{
+	randomize();
+
+	vector<int> ivec;
+
+	fc(ivec, 100, rand);
+	fc(ivec, 100 , [](){return rand() % 1000});
+
+	return 0;
+}
+
+Find algoritması
+
+int main(int argc, char const *argv[])
+{
+	randomize();
+	list<string> mylist;
+	fc(mylist, 100, rs);
+	display(mylist);
+
+	string sval;
+
+	cout << "aranacak ismi girin: ";
+	cin >> sval;
+
+	auto iter = find(mylist.begin(), mylist.end() , sval);
+	if(iter == mylist.end()){
+		cout << "bulunamadı" << endl;
+	}
+	else{
+		cout << "bulundu" << endl;
+	}
+
+
+	return 0;
+}
 
 
 
+bool isOk(const string &r){
+	return r.size() == 7;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+predicate bool donduren fonksiyonlardır.
+tek parametreli unary predicate
+iki parametreli ise binary predicate
 
 
 
