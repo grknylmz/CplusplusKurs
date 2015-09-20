@@ -3829,6 +3829,409 @@ tek parametreli unary predicate
 iki parametreli ise binary predicate
 
 
+int main(int argc, char const *argv[])
+{
+	randomize();
+	list<string> slist;
+
+	fc(slist, 100, rs);
+	display(slist);
+	vector<string> svec;
+	char c;
+
+	cout << "bir karakter girin : ";
+	cin >> c;
+	int n;
+
+	cout << "kacıncı karakter";
+	cin >> "n";
+
+	copy_if(slist.begin(), slist.end(), back_inserter(svec) , [=](const string &r){return r[n] ==c;});
+	display(svec);
+
+
+
+
+	return 0;
+}
+
+
+
+****************************************************************************************************************
+
+template <typename Iter>
+void Advance(Iter &r, int n, std::random_access_iterator_tag){
+
+}
+template <typename Iter>
+void Advance(Iter &r, int n, std::bidirectional_iterator_tag){
+	
+}
+
+
+template<typename Iter>
+void Advance(Iter &r, int n){
+	Advance(r, n, typename Iter::iterator_category());   /// Bu türden geçici nesne yaratma syntax i
+}
+
+
+int main(int argc, char const *argv[])
+{
+	
+	return 0;
+}
+
+
+
+
+****************************************************************************************************************
+
+#include <iterator>
+using namespace std;
+
+template<typename C, typename T, typename D = ptrdiff_t , typename P = T * , typename R = T&>
+struct Iterator{
+	typedef C iterator_category;
+	typedef T value_type;
+	typedef D difference_type;
+
+};
+
+int main(int argc, char const *argv[])
+{
+	iterator<>
+	return 0;
+}
+
+
+
+////  C++ template metaprogramming Conceptes Tools Techniques David Abragam Aleksey Gurtovoy
+
+using Iter = list<Myclass>::iterator;
+class Myclass{};
+int main(int argc, char const *argv[])
+{
+	return 0;
+}
+
+
+
+
+template<typename Iter> 
+struct Iterator_traits{
+	typedef typename Iter::iterator_category iterator_category;
+	typedef typename Iter::value_type value_type;
+};
+
+template<typename Iter>
+void algo(Iter beg, Iter end){
+	typename Iterator_traits<Iter>::value_type;
+}
+
+template<typename T>
+struct Iterator_traits<T *>{
+	typedef T value_type;
+};
+
+
+****************************************************************************************************************
+
+int main(int argc, char const *argv[])
+{
+	list<int> mylist(10);
+
+	vector<int> myvec;
+
+	copy(mylist.begin() , mylist.end(), back_inserter(myvec));
+
+
+	return 0;
+}
+
+
+
+
+T *ptr ->interface yazma fonksiyonu
+const T* ptr -> okuma fonk.
+
+Algoritmaların template tür parametreleri : 
+vector<int> iterator template argument deduction da const semantiğini nasıl sağlarız ? 
+
+const Iter x; -> sınıf nesnesinin kendisi const olur.
+Bizim ihtiyacımız *iter in constluğu yani içeriğin constluğu
+ 
+
+
+ int main(int argc, char const *argv[])
+ {
+ 	list<string> mylist;
+
+ 	randomize();
+
+ 	fc(mylist, 20 , rs);
+
+ 	display(mylist);
+
+ 	list<string>::const_iterator iter = mylist.begin();
+ 	*iter = "selami";
+
+ 	auto iter = mylist.cbegin(); /// C++11 ile geldi auto şekliyle iterator ün const edilmesi durumu.
+
+
+
+
+
+	list<string>::iterator iter = find(mylist.begin() , mylist.end() , [](const string &r){return r.size() >= 3; });
+
+
+
+
+ 	return 0;
+ }
+ ****************************************************************************************************************
+
+template<class Iter>
+void put<Iter beg, Iter end>
+{
+	while (beg != end)
+		std::cout<< *beg++ << " ";
+	std::cout<< std::endl;
+
+}
+
+
+
+
+int main(int argc, char const *argv[])
+{
+	begin(mylist); //buradaki amaç  ? normal diziler için kullanabilmek için bu şekilde bir fonksiyon getirilmiştir.
+
+	int a[100] = {0};
+
+	begin(a);
+
+
+	return 0;
+}
+
+
+
+Itereator , reverse iterator , const iteratore , cbegin .
+
+
+****************************************************************************************************************
+
+
+int main(int argc, char const *argv[])
+{
+	randomize();
+
+	list<string> mylist;
+	fc(mylist,10 , rs);
+
+	display(mylist.begin(), mylist.end());
+
+	display(mylist.rbegin(), mylist.rend());
+
+	///Hepsi 2011 öncesinde mevcuttu.
+
+	
+	return 0;
+}
+
+
+Algoritmalar:
+
+
+for each algoritması::
+template<class Iter , class F>
+F For_each(Iter beg, Iter end, F f){
+	while(beg != end)
+	f(*beg++);
+	
+	return f;
+}
+
+For_each(mylist.begin(), mylist.end() , [](const string &){cout << r << " ";});
+Sonunda copy olanlar o haliyle kopyalayıp başka bir yere gönder.
+
+remove copy kopyala ve sil.
+
+****************************************************************************************************************
+
+int main(int argc, char const *argv[])
+{
+	string name;
+	cout << "İsim girin." ;
+	cin >> name ;
+
+	remove_copy(mylist.begin(), mylist.end(), back_inserter(myvec), name);
+	display(myvec);
+
+	return 0;
+}
+
+bool isWowel(char c){
+	c = toupper(c);
+	return c == 'A' || c == 'E' || c == 'I' || c == 'U' || c == 'O';
+}
+
+remove copy if --> bi koşula uyanları silip kopyalayacak.
+
+remove_copy_if(mylist.begin(), mylist.end(), back_inserter(myvec) , [](const string &r){return !(isWowel(r[0]) && isWowel(r.back));});
+display(myvec);
+
+
+****************************************************************************************************************
+int main(int argc, char const *argv[])
+{
+	mylist.erase(mylist.begin());
+	mylist.erase(--mylist.end());
+
+	string name;
+	cout << "isim girin : ";
+	cin >> name;
+
+	auto iter = find(mylist.begin(), mylist.end(), name);
+	if (iter == mylist.end())
+	{
+		cout << "bulunamadı\n"
+	}
+	else{
+		mylist.erase(iter, mylist.end());
+	}
+
+	display(mylist);
+	return 0;
+}
+
+
+****************************************************************************************************************
+
+Removing algorithm --> STL'de'ki silme algoritmalar:
+Gerçek silme değil logic silme gerçekleştiriyor.
+
+remove ile silinme yok.
+erase ile silinme yapılabiliyor.
+
+int main(int argc, char const *argv[])
+{
+	list<int> mylist;
+	fc(mylist, 30 , [](){return rand() % 5 ;});
+	display(mylist);
+
+
+	int val;
+	cout << "Bir sayı giriniz";
+	cin >> ival;
+
+	auto iter = remove(mylist.begin(), mylist.end(), ival); // Enson silinmesi gereken değerden sonraki eleman
+	cout << "size" << mylist.size() << endl;
+	display(mylist.begin , iter);
+
+	mylist.erase(remove(mylist.begin(), mylist.end(),iter), mylist.end());
+
+
+	return 0;
+}
+
+Fiziksel silme yapmak gerekiyor ise ?
+
+int main(int argc, char const *argv[])
+{
+	vector<string> myvec;
+	fc(myvec, 100, rs);
+	display(myvec);
+	
+	char c;
+
+	cout << "Bir harf girin." ;
+	cin >> c;
+
+	/// remove if , container array fonksiyonu , lambda 
+	predicate
+	Container 'da ' tutulan öğe türünden gönderiliyor.
+
+ 	svec.erase(remove_if(myvec.begin(), myvec.end(), [=]( const string &s ){ return s.find(c) != string::npos }),svec.end());
+
+
+
+
+	return 0;
+}
+
+
+Unique algoritması  // Ardışık bir tane bile eleman olmayacak.
+// Bir range i sıralayıp uniqe hale getirir isek her elemandan bir adet kalır.
+
+
+unique();
+
+int main(int argc, char const *argv[])
+{
+	randomize();
+	list<int> 
+
+
+	mylist.erase(unique(mylist.begin(), mylist.end()),mylist.end());
+	return 0;
+}
+
+
+int main(int argc, char const *argv[])
+{
+	string str;
+	cout << "Bir yazı girin";
+
+	getLine(cin, str);
+	str.erase(unique(str.begin(), str.end()),str.end());
+
+	display(str);
+	return 0;
+}
+
+
+int main(int argc, char const *argv[])
+{
+	vector<string> svec;
+	randomize();
+
+	fc(svec,100,rs);
+
+
+	///Ardışık iki öğenin uzunluğu aynı olmayacak.
+	svec.erase(unique(svec.begin(), svec.end() , [](const string &r1, const string &r2){return r1.size() == r2.size();}),svec.end());
+	return 0;
+}
+
+
+****************************************************************************************************************
+
+Transform Algoritması:
+2 adet overload u mevcut 1 range den öğeyi alıyo fonksiyona gönderiyo geri dönüş değerini başka bir range  e yazıyo.
+
+int main(int argc, char const *argv[])
+{
+	list<size_t> lenlist;
+	fc(svec, 100)
+
+	char c;
+	cout << " bir karakter girin : ";
+	cin >> c;
+
+
+	return 0;
+}
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
 
 
 
