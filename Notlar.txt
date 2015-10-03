@@ -4228,11 +4228,647 @@ int main(int argc, char const *argv[])
 
 
 
+lambda
+
+int main(int argc, char const *argv[])
+{
+	auto f = [](double d1, double d2) -> int{return d1 + d2 }; /// Donus olarak int verdi.
+
+	f(1.3 , 5.6);
+	return 0;
+}
+
+Container lar
+
+
+****************************************************************************************************************
+Sequential Containers
+
+
+vector
+string
+deque
+list
+forward_list --> C++ 11
+array --> C++ 11
+
+
+Associative Containers
+
+Set
+multiset
+map
+multimap
+unordered_set
+unordered_multiset
+unordered_map
+unordered_multimap
+
+Container adaptörleri
+
+stack
+queue
+
+
+Container kullanıcaksan vector kullan ? Senaryoların %80 inde vector işimizi görür
+Ekleme ve silme işlemleri baştan veya sondan yapılıyorsa deque daha mantıklı sabit zamanda işlem yapar
+
+
+Container ın referans semantiği ile kullanılmasını istiyor isek , SmartPointer kullanmak zorundayız.
+
+vector<list<string>>  // 2011 ile kullanımı garanti altına alındı farklı bir derleyici sıkıntı çıkartabilir.
+
+Vector Sınıfı
+STL'in' en fazla kullanılan sınıfıdır. 
+herşeyi sıra ile bir arada tutar
+
+
+Konum bilgisi ile sabit zamanda erişmek. En önemli konu bu.
+Sondan ekleme maaliyetini düşürmek için öğe sayısının ihtiyaç duyduğu bellek alanından daha uzun tutuyor.
+En önemli problemi pointer yada iterator invalidation.
+Bağlı listenin interface i diğerlerinden daha farklı
+
+
+vector::::
+
+int main(int argc, char const *argv[])
+ {
+ 	std::vector<int> ivec;
+ 	cout << "ivec.size()" << ivec.size() << endl;
+
+ 	if(ivec.empty())
+ 		cout << "vector bos.."<< endl;
+
+
+ 	return 0;
+ } 
+
+
+
+Atama operator fonksyinu ve copy constructor member template değil
+İki container i birbirine atama yapma şansım yok. Yada copy constructor kullanılarak kopyalama yapılamaz.
+
+std::vector<int> ivec(20);
+
+
+std::vector<double>  dvec(ivec.begin() , ivec.end());
+
+bu şekilde atama yapabiliriz.
+
+std::vector<int> v(15); --> sayısal değer ise 0 la başlar.
+sınıf nesneleri için default constructor kullanılacak.
+
+Bu kadar adet bu değerle başlat constructor ı -> 
+
+Date mydate{12,7,1987};
+vector<Date> myvec(20,mydate); ///20 tane myvecden oluştur.
+
+display(myvec);
+
+
+
+****************************************************************************************************************
+
+std::vector<int> myvec;
+
+
+
+kapasite fonksiyonu kapasite değerini get eder.
+vector ün ilgili açılımının size_type türü
+kapasitenin geri dönüş türü ne ise 
+
+
+std::vector<int> myvec(35);
+
+for (int i = 0; i < 20; ++i)
+{
+	myvec.push_back(k);
+
+	cout << "capacity" << myvec.capacity() << endl;
+
+}
+
+
+
+
+std::vector<int> v;
+auto cap = v.capacity();
+
+while(true){
+	x.push_back(0);
+	if(x.capacity() != cap){
+		cout << "new capacity" << x.capacity() << end;
+		cap = x.capacity();
+		getchar();
+
+	}
+
+}
+
+
+reserve fonksiyonu kapasiteyi önceden ayarlar.n nesnelik yer önceden garanti altına alınır.
+
+v.reserve(50000);
+yavaş yavaş arttırmak istediğimizde kullanılabilir.
+
+
+non-binding shrink request : 	kapasitenin altına düşürmeye çalışma sonucu oluşan durum
+								vector de size düşürülmeye çalışılsa bile kapasite dşürülemez.
+
+swap trick 
+
+std::vector<int> (x).swap(x); //Kapasite düşer.
+
+shrink_to_fit fonksiyonu
+
+swap trick neredeyse bütün implementasyonlarda aynı.
+size ve capacity yi eşitler.
+resize() isimli fonksiyon container in size ini değiştir.. 
+
+resize() ile silme yapabilirmiyim ? Evet.
+
+Öğelere erişim
+Range in başlangıç ve bitiş iteratörlerini kullanarak dönebilir.
+
+vector string deque ve array container ları ekleme çıkarmayı overload etmişlerdir.
+Contiainer ı vector yerine list yaparasnız. 
+
+okuma araçlı erişimlerde const operatör kullanmalıyız
+container daki elemanıdeğiştirceksek referans kullanmalıyız.
+
+iterator yoluyla dolaşmanın amacı dolaşım döngüsü bozulmaz
+
+vector<int> myvec(begin(a) , end(a));  ///C++11
+
+
+****************************************************************************************************************
+
+
+
+Uzunluğu odd olanlar silinecek even olanlar duplicate edilecek.
+
+Tek bir iterator döngüsü ile yapılacak.
+
+algoritma ve lamda kullanılmıcak
+insert ve erase işlevlerini kullanarak
+
+myvec.insert()  /// Nereye neyi insert ediceksiniz?
+
+
+myvec.insert();
 
 
 
 
 
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+****************************************************************************************************************
 
 
 
