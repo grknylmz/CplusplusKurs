@@ -4420,103 +4420,262 @@ myvec.insert();
 
 
 
-
-
-
-
-
-
-
-
 ****************************************************************************************************************
 
 
 
 
+struct Pred{
+	bool operator<()(const string &r, const string &r2){
+		///Lambda expression
+	}
+};
+
+int main(int argc, char const *argv[])
+{
+	set<string , greater<string>> myset;  // Seti büyükten küçüğe sıralama
+
+
+	randomize();
+	fc(myset , 100 , rs);
+	for (const auto &r : myset)
+	{
+		cout << r << endl;
+	}
+	return 0;
+}
+
+
+
+auto lambda = [](const string &r1 , const string &r2){
+	if(r1.size() != r2.size())
+		return r1.size() < r2.size();
+
+	return r1 < r2;
+
+}
+
+
+set<string , decltype(lambda)> myset(lambda);
+
+
+
+int main(int argc, char const *argv[])
+{
+	set<int> myset; ///fill constructor mevcut değil.
+	vector<string> myvec;
+
+	randomize();
+	fc(myvec, 100 , rs);
+	display(myvec);
+
+
+	/// range constructor
+
+	set<string> myset(myvec.begin(), myvec.end());
+	display(myvec);
+
+	cout << myset.size() << endl;
+	/// multiset olsa idi aynı anahtardan birden fazla olabilecek idi.
+
+
+	set<string> vipNames; 
+	//set te tekilleştirme işlemi gerçekleşir.
+
+
+
+
+	return 0;
+}
+
+
+///Setin ne işe yaradığı vurgusunu arttıralım 
+int main(int argc, char const *argv[])
+{
+	
+	set<Date> impDates;
+	randomize();
+	for(int k = 0 ; k < 200 ; k++ )
+	impDates.insert();
+
+
+
+////// Asıl tarihlerimiz burda: 
+
+	std::vector<Date> DateVec;
+	fc(datevvec , 2000 , Date::Random);
+	
+	for(auto &d : datevec )
+	{
+		if(impDates.find(d) != impDates.end()){
+			cout << "Özel Tarih" << d << endl;	
+		}
+		d++;
+	}
+
+
+
+	return 0;
+
+}
+
+****************************************************************************************************************
+
+set için ; 
+
+
+Burada push back veya push front mevcut değil. Insert kullanıcaz.Insert edilmesi gereken yere insert edecek.
+Insert ün interface i : 
+Geri dönüş değeri pair in iteratör bool açılımı. Second ı ekleme yapılmışsa true olacak.
+
+int main(int argc, char const *argv[])
+{
+	set<string> myset;
+	randomize();
+	fc(myset , 20 , rs);
+	display(myset);
+	string name;
+
+	cout << "eklenecek ismi girin." << endl;
+
+	auto mp = myset.insert(name);
+	if(mp.second){
+		cout << "ekleme yapildi" << endl;
+		display(myset);
+		cout << "eklenen öğe : " << *mp.First << endl;
+	}
+	else{
+		cout << "Zaten var." endl;
+		//// mp.first->assign(10 , 'A');
+
+	}
+
+	return 0;
+}
+
+
+
+value_type&& val semantiği taşıma semantiğine denk geliyor.
+mapdeki , multimap deki , multisetteki , Setteki anahtar const kabul edilir değiştirilemez.
+Silip tekrar ekleme yapmak gerekir.
+erase() -> iteratorler silen fonksiyon
+
+
+unordered set ile hızı arttırabiliyoruz. Hash tablosu olduğu için ince ayar yapılabilen bir interface i mevcut
+birden fazla insert işlemi tek insert işleminden daha verimli.n taneyi tek seferde insert edebilecek bir interface varsa performansı arttırır , düşürmez
+
+
+int main(int argc, char const *argv[])
+{
+	list<string> mylist ;
+	fc(mylist , 10 , rs);
+	display(mylist);
+
+	myset.insert(mylist.begin() , mylist.end() );
+
+	myset.insert({"erkan" , "gurkan" , "turkan" , "serkan" , "tarkan"});
 
 
 
 
 
 
-
-
-
-
-
-
-
+	return 0;
+}
 
 
 ****************************************************************************************************************
 
 
+find fonksiyonu eleman varsa iterator yoksa end i döndürücek.
+Multiset ise bulunan arananlardan ilki.
+Set is unique olduğu için count() fonksiyonu 1  ya da 0 döndürmektedir.
+
+Lower bound ve upper bound değerler nedir ? 
+
+Sıralı veri yapılarına yönelik bir kavram. Container da tutulan veriler için geçerli , insert edilecek değer için kulalnılır. 
+
+Lower Bound : >= insert edilebeileceği ilk konum yani ondan büyük eşit olan ilkinin konumu sırayı bozmadan insert edebileceğim ilk konum
+Upper Bound : >  elemanın eklenebileceği son yer.
+
+5 6 7 için 6 sayısını ele alırsak 
+lower bound ı -> 6
+upper bound ı -> 7
+
+lower bound ve upper bound range olursa arada nesnler varsa bu aradaki range e equal bound denir.
 
 
 
+int main(int argc, char const *argv[])
+{
+	multiset<int> myset;
+	randomize();
 
+	fc(myset, 100 , [](){return rand() % 10; });
 
+	display(myset);
+	int ival;
+	cout << "degeri girin";
+	cin >> ival;
 
-
-
-
-
-
-
-
-
-
-
-
+	for (auto iterp = myset.equal_range(ival) ; iterp)
+	return 0;
+}
 ****************************************************************************************************************
 
 
+auto n = myset.erase(ival);
+
+cout << "n öğe silindi" <<  endl;
+
+auto iter = myself.find(ival); --> iter i geri döndürür.
+
+Map herzaman pair tutuyor.
+
+int main(int argc, char const *argv[])
+{
+	multiset<int, greater<int>> myset;
+	randomize();
+
+	auto x = myset.key_comp();
+
+	cout << boolalpha << x(10,30) << endl;
+
+	return 0;
+}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-****************************************************************************************************************
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+boolalpha manipülatörü -> akımı true false veya 0 - 1 mi kullanıdırtsın.
 
 ****************************************************************************************************************
 
+Map Container 
+
+Her değere karşılık bir key var.
+
+int main(int argc, char const *argv[])
+{
+	map<string, int> mymap;
+	map<string , string> mymap;
+	map<string , Date , greater <string> > bDateMap;
+
+	map<string, int> myset;
+
+	map<string , int > mymap {{"zeliha" , 76} , {"ali" , 27} , {"nur" , 27} , {"deniz" , 22} , {"ayca" , 22}} ; 
+
+	for (auto iter  = mymap.begin(); iter != mymap.end() ; ++iter )
+		cout << iter->first << " " <<iter->second; // Anahtara
+	mymap.insert(pair<string, int>("orhan" , 27);
+		mymap.insert(make_pair("nurdan" , 45 ));
+		mymap.insert(map<string , int , ,greater >)
+
+	return 0;
+}
 
 
-
-
-
-
-
+for (int k = 0 ; k < 1000 ; ++k)
+	nd_map.insert(make_pair)
 
 
 
