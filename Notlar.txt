@@ -4676,49 +4676,139 @@ int main(int argc, char const *argv[])
 
 for (int k = 0 ; k < 1000 ; ++k)
 	nd_map.insert(make_pair)
+****************************************************************************************************************
+
+int main(int argc, char const *argv[])
+{
+	map<string , int> simap;
+
+	for (int i = 0; i < 20; ++i)
+	{
+		simap.insert(make_pair(rs() , rand()));
+	}
 
 
 
 
-
-
+	for (const auto &p ; ++i)
+	{
+		/* code */
+	}
+	return 0;
+}
 
 
 
 
 
 ****************************************************************************************************************
+										Giriş ve Çıkış İşlemleri
+
+
+int main(int argc, char const *argv[])
+{
+	string s = "ali";
+	double d = 34.23;
+	int ival = 12;
+
+	cout  << s << " " << d << ival << endl ;
+
+	cout << sl;
+
+	ostringstream ofs;
+	ofstream ofs("ali.txt")
+	ofs << s << " " << d << ival << endl;
+	
+	ofs.str();
+
+	return 0;
+}
+
+formatlı giriş çıkış fonksiyonları << ve >> fonknsyionlarıdır.
+cin türü istream
+cout  türü ostream
+cerr standard hata akımını kontrol eden nesne
+formatlama en sıkıntılı yer çok detay var.
+
+Tamsayılar söz konusu olduğunda 
+
+*Sayi sistemi önemli gösterilsinmi
+
+*Sayı sistemi tabanı gösterilsinmi
+
+*Artımın gösterilip gösterilmiyceği
+
+Gerçek sayılar için
+
+*Üstel notasyondamı
+*Noktanın görülüp gösterilmiyceği
+*Fix notasyonsa ne kadar gösterilceği
+
+On Off Bayrağı
+
+
+fmtflags -> Gerçekte hangi tür olduğu belirsiz , derleyici kendisi seçebilir (unsigned int veya bitsettir) Bitwise manipulation a uygundur. Tamsayı
+türlerine zaten uygun. 
+
+setf(ios::boolalpha(const static veri elemanları,))  --> Bu biti birliyor.
+
+cout << ( 19 > 5) endl;  (1 olarak yazdı)
+cout.setf(ios_base::boolalpha) (true false olarak yazacak)  /// Set format
+
+
+setf()     -----     unsetf()
+**************
+bitset<32>  x(ios::boolalpha);
 
 
 
+cout.unsetf(ios::boolalpha);   /// Eski hale getirme işlemi.
+
+int x = 3452378;
+cout.setf(ios::hex, ios::basefield);
+cout.setf(ios::uppercase);
+cout.setf(ios::showbase);
+cout << x << endl;
+
+ 
+ double f = 345.;
+ cout.setf(ios::showpoint);
+ cout << f << endl;
+
+bitset<32> x(ios::oct);
+bitset<32> y(ios::dec);
+bitset<32> z(ios::hex);
+bitset<32> t(ios::basefield);
 
 
+cout << x << endl;
+cout << y << endl;
+cout << z << endl;
+cout << t << endl;
+
+cout.setf(ios::oct, ios::basefield);
+
+cout.setf(ios::left, ios::adjustfield); // Sola dayıcakn yazdırırken 
 
 
+adjustfield , basefield , floatfield hepsinin ayrı özellikleri mevcut.
 
 
+auto x = cout.flags();   ---> frt flags i overload ediyor. X de saklanan değer bayrağın kendisi
 
 
+cout.flags(cout.flags() | ios::boolapha );
+cout.flags(cout.flags( ) & ~ios::boolapha);
 
 
+int main(int argc, char const *argv[])
+ {
+ 	auto fmt = os.flags();
+ 	os.flags(fmt);
 
 
-
-
-
-
-****************************************************************************************************************
-
-
-
-
-
-
-
-
-
-
-
+ 	return 0;
+ } 
 
 
 
